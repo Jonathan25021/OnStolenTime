@@ -29,7 +29,6 @@ public class PlayerScript : MonoBehaviour
     public GameObject secondaryWeapon;
     #endregion
 
-
     #region UnityFuncs
     void Start()
     {
@@ -92,5 +91,4 @@ public class PlayerScript : MonoBehaviour
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
     }
     #endregion
-
 }
