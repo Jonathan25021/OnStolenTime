@@ -23,7 +23,10 @@ public class PlayerScript : MonoBehaviour
     public float staminaDrainPerFrame = 20.0f;
     public float staminaRegenPerFrame = 30.0f;
     public float staminaTimeToRegen = 3.0f;
+    // roll
     public float rollStaminaCost = 40;
+    public float slideSpeed = 3f;
+    private float currSlideSpeed;
     #endregion
 
     #region combatVars
@@ -31,17 +34,45 @@ public class PlayerScript : MonoBehaviour
     public GameObject secondaryWeapon;
     #endregion
 
+    private State state;
+    private enum State
+    {
+        Normal, Roll, Attack,
+    }
+
     #region UnityFuncs
     void Start()
     {
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
         currHealth = maxHealth;
+        currSlideSpeed = slideSpeed;
+        state = State.Normal;
     }
 
     void Update()
     {
-        // sprinting and stamina
+        switch (state)
+        {
+            case State.Normal:
+                movementMaster();
+                lookAtMouse();
+                rollCheck();
+                break;
+            case State.Roll:
+                roll();
+                break;
+        }
+        // roll
+        
+
+        // primary weapon attack
+    }
+    #endregion
+
+    #region movemenetFuncs
+    private void movementMaster()
+    {
         sprinting = Input.GetKey(KeyCode.LeftShift) && currStamina > 0;
         if (sprinting && !playerRB.velocity.Equals(Vector2.zero))
         {
@@ -69,27 +100,41 @@ public class PlayerScript : MonoBehaviour
             playerRB.velocity = movement * baseMoveSpeed;
         }
 
+    }
+
+    private void lookAtMouse()
+    {
         // makes player look at mouse
         dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 
-        // roll
-        if (Input.GetKey(KeyCode.LeftControl) && currStamina - rollStaminaCost >= 0)
+    private void rollCheck()
+    {
+        if (Input.GetKey(KeyCode.R) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero))
         {
-            roll();
+            staminaRegenTimer = 0f;
+            currStamina -= rollStaminaCost;
+            currSlideSpeed = slideSpeed;
+            state = State.Roll;
         }
+    }
 
-        // primary weapon attack
+    private void roll()
+    {
+        transform.position += new Vector3(movement.x, movement.y) * 3f * Time.deltaTime;
+        currSlideSpeed -= currSlideSpeed * 2f * Time.deltaTime;
+        Debug.Log(currSlideSpeed);
+        if (currSlideSpeed < 1f)
+        {
+            Debug.Log("done Rolling");
+            state = State.Normal;
+        }
     }
     #endregion
 
     #region combatFuncs
-    IEnumerator roll()
-    {
-
-        yield return null;
-    }
     #endregion
 
     #region healthFuncs
