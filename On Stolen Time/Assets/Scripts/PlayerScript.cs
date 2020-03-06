@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region movemenentVars
+    private Vector2 movement;
     public float baseMoveSpeed = 1;
     public float sprintMoveSpeed = 2;
     private Rigidbody2D playerRB;
@@ -22,9 +23,10 @@ public class PlayerScript : MonoBehaviour
     public float staminaDrainPerFrame = 20.0f;
     public float staminaRegenPerFrame = 30.0f;
     public float staminaTimeToRegen = 3.0f;
+    public float rollStaminaCost = 40;
     #endregion
 
-    #region attackVars
+    #region combatVars
     public GameObject primaryWeapon;
     public GameObject secondaryWeapon;
     #endregion
@@ -57,7 +59,7 @@ public class PlayerScript : MonoBehaviour
         // movement
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+        movement = new Vector2(moveHorizontal, moveVertical);
         if (sprinting)
         {
             playerRB.velocity = movement * sprintMoveSpeed;
@@ -72,12 +74,22 @@ public class PlayerScript : MonoBehaviour
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+        // roll
+        if (Input.GetKey(KeyCode.LeftControl) && currStamina - rollStaminaCost >= 0)
+        {
+            roll();
+        }
+
         // primary weapon attack
     }
     #endregion
 
-    #region attackFuncs
+    #region combatFuncs
+    IEnumerator roll()
+    {
 
+        yield return null;
+    }
     #endregion
 
     #region healthFuncs
