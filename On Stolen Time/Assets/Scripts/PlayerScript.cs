@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     #region healthVars
     public float maxHealth = 100;
     private float currHealth;
+    private float currTimer;
     #endregion
 
     #region movemenentVars
@@ -27,6 +28,8 @@ public class PlayerScript : MonoBehaviour
     public float rollStaminaCost = 40;
     public float slideSpeed = 3f;
     private float currSlideSpeed;
+    // countdown
+    public int startTimer = 600;
     #endregion
 
     #region combatVars
@@ -48,6 +51,7 @@ public class PlayerScript : MonoBehaviour
         currHealth = maxHealth;
         currSlideSpeed = slideSpeed;
         state = State.Normal;
+        currTimer = startTimer;
     }
 
     void Update()
@@ -63,10 +67,25 @@ public class PlayerScript : MonoBehaviour
                 roll();
                 break;
         }
+        countDown();
         // roll
-        
+        //if (currHealth == 0)
+        //{
+        //    Destroy(this);
+        //}
 
         // primary weapon attack
+    }
+    #endregion
+
+    #region timeFuncs
+    private void countDown()
+    {
+        currTimer -= Time.deltaTime;
+        if (currTimer < 0)
+        {
+            die();
+        }
     }
     #endregion
 
@@ -146,6 +165,12 @@ public class PlayerScript : MonoBehaviour
     public void heal(float healVal)
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
+    }
+
+    public void die()
+    {
+        Destroy(this.gameObject);
+
     }
     #endregion
 }

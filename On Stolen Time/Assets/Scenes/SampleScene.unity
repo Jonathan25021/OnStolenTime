@@ -286,6 +286,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: e501905d722c8dd4089e10312fd79be4,
         type: 3}
+    - target: {fileID: 3115022108499799515, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: startTimer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3115022108499799516, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: m_Name
