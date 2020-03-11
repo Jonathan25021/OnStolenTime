@@ -147,5 +147,11 @@ public class PlayerScript : MonoBehaviour
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
     }
+
+    private void Die()
+    {
+        Destroy(this.gameObject);
+        Debug.Log("player died");
+    }
     #endregion
 }
