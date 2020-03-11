@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour
     private State state;
     private enum State
     {
-        Normal, Roll, Attack,
+        Normal, Roll, Attack
     }
 
     #region UnityFuncs
@@ -68,11 +68,10 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         countDown();
-        // roll
-        //if (currHealth == 0)
-        //{
-        //    Destroy(this);
-        //}
+        if (currHealth == 0)
+        {
+            Die();
+        }
 
         // primary weapon attack
     }
@@ -84,7 +83,7 @@ public class PlayerScript : MonoBehaviour
         currTimer -= Time.deltaTime;
         if (currTimer < 0)
         {
-            die();
+            Die();
         }
     }
     #endregion
@@ -166,11 +165,11 @@ public class PlayerScript : MonoBehaviour
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
     }
-
-    public void die()
+    
+    private void Die()
     {
         Destroy(this.gameObject);
-
+        Debug.Log("player died");
     }
     #endregion
 }

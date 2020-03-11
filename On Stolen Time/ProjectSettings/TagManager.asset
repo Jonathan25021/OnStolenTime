@@ -5,9 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Projectile
-  - Pickup
-  - New tag
   layers:
   - Default
   - TransparentFX
@@ -44,19 +41,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 470678697
-    locked: 0
-  - name: Projectile
-    uniqueID: 2135395623
-    locked: 0
-  - name: Pickup
-    uniqueID: 2471345779
-    locked: 0
-  - name: Main Sprites
-    uniqueID: 841509025
-    locked: 0
-  - name: UI
-    uniqueID: 2640047323
     locked: 0
