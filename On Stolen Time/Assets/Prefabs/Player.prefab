@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: b6b126f12ba57904a81a0d374042d890, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,9 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0648877a8f2b79c488cdce90b5382375, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
   baseMoveSpeed: 1
   sprintMoveSpeed: 2
   maxStamina: 100
   staminaDrainPerFrame: 20
   staminaRegenPerFrame: 30
   staminaTimeToRegen: 3
+  rollStaminaCost: 40
+  slideSpeed: 3
+  primaryWeapon: {fileID: 0}
+  secondaryWeapon: {fileID: 0}
