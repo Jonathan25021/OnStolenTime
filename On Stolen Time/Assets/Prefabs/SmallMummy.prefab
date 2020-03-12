@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6561833630054420360}
   - component: {fileID: 8184435157960122940}
   m_Layer: 0
-  m_Name: SmallMummy 1
+  m_Name: SmallMummy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.6
 --- !u!50 &6561833630054420362
 Rigidbody2D:
   serializedVersion: 4
@@ -146,7 +146,7 @@ PrefabInstance:
     - target: {fileID: 4086818386071832878, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}
       propertyPath: m_Radius
-      value: 21.19
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4187434796731072467, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}

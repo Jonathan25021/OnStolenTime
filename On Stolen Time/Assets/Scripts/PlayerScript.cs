@@ -68,10 +68,6 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         countDown();
-        if (currHealth == 0)
-        {
-            Die();
-        }
 
         // primary weapon attack
     }
@@ -142,23 +138,40 @@ public class PlayerScript : MonoBehaviour
     private void roll()
     {
         transform.position += new Vector3(movement.x, movement.y) * 3f * Time.deltaTime;
-        currSlideSpeed -= currSlideSpeed * 2f * Time.deltaTime;
-        Debug.Log(currSlideSpeed);
+        currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
+        Debug.Log("Player rolling");
         if (currSlideSpeed < 1f)
         {
-            Debug.Log("done Rolling");
             state = State.Normal;
         }
     }
     #endregion
 
     #region combatFuncs
+    private void attackCheck()
+    {
+        if (Input.GetMouseButton(0))
+        {
+
+        }
+        else if (Input.GetMouseButton(1))
+        {
+
+        }
+
+    }
+
+    
     #endregion
 
     #region healthFuncs
     public void takeDamage(float damageVal)
     {
         currHealth -= damageVal;
+        if (currHealth <= 0)
+        {
+            Die();
+        }
     }
 
     public void heal(float healVal)
