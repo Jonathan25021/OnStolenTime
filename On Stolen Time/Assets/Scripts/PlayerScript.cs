@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+
     #region healthVars
     public float maxHealth = 100;
     private float currHealth;
@@ -12,8 +14,8 @@ public class PlayerScript : MonoBehaviour
 
     #region movemenentVars
     private Vector2 movement;
-    public float baseMoveSpeed = 1;
-    public float sprintMoveSpeed = 2;
+    public float baseMoveSpeed = 3;
+    public float sprintMoveSpeed = 5;
     private Rigidbody2D playerRB;
     private Vector3 dir;
     // stamina
@@ -37,6 +39,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject secondaryWeapon;
     #endregion
 
+    #region UI
+    public Slider HealthBar;
+    public Slider StaminaBar;
+    #endregion
+
     private State state;
     private enum State
     {
@@ -52,6 +59,8 @@ public class PlayerScript : MonoBehaviour
         currSlideSpeed = slideSpeed;
         state = State.Normal;
         currTimer = startTimer;
+        HealthBar.value = healthRatio();
+        StaminaBar.value = staminaRatio();
     }
 
     void Update()
@@ -62,9 +71,15 @@ public class PlayerScript : MonoBehaviour
                 movementMaster();
                 lookAtMouse();
                 rollCheck();
+                attackCheck();
                 break;
             case State.Roll:
                 roll();
+                break;
+            case State.Attack:
+                movementMaster();
+                rollCheck();
+                lookAtMouse();
                 break;
         }
         countDown();
@@ -113,7 +128,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * baseMoveSpeed;
         }
-
+        StaminaBar.value = staminaRatio();
     }
 
     private void lookAtMouse()
@@ -145,6 +160,11 @@ public class PlayerScript : MonoBehaviour
             state = State.Normal;
         }
     }
+
+    private float staminaRatio()
+    {
+        return currStamina / maxStamina;
+    }
     #endregion
 
     #region combatFuncs
@@ -152,22 +172,59 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-
+            attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
         {
-
+            state = State.Attack;
+            attackWith(secondaryWeapon);
         }
 
     }
 
-    
+    private void attackWith(GameObject weapon)
+    {
+        if (weapon.GetComponent<WeaponScript>().WeaponType() == 0)
+        {
+            StartCoroutine(MeleeAttackRoutine(weapon.GetComponent<MeleeWeaponScript>().damage));
+        }
+        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
+        {
+
+        }
+        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
+        {
+
+        }
+    }
+
+    IEnumerator MeleeAttackRoutine(float damage)
+    {
+        state = State.Attack;
+        Debug.Log("Cast hitbox now");
+        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 1);
+        for (int i = 0; i < info.Length; i++)
+        {
+            if (info[i].tag == "Enemy")
+            {
+                info[i].GetComponent<EnemyScript>().TakeDamage(damage);
+            }
+        }
+        yield return new WaitForSeconds(.75f);
+        state = State.Normal;
+    }
+
     #endregion
 
     #region healthFuncs
     public void takeDamage(float damageVal)
     {
+        if (state.Equals(State.Roll))
+        {
+            return;
+        }
         currHealth -= damageVal;
+        HealthBar.value = healthRatio();
         if (currHealth <= 0)
         {
             Die();
@@ -177,11 +234,18 @@ public class PlayerScript : MonoBehaviour
     public void heal(float healVal)
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
+        HealthBar.value = healthRatio();
     }
     
+    private float healthRatio()
+    {
+        return currHealth / maxHealth;
+    }
+
     private void Die()
     {
-        Destroy(this.gameObject);
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
+        //Destroy(this.gameObject);
         Debug.Log("player died");
     }
     #endregion

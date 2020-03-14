@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1959891490442935949}
   - component: {fileID: 8671708813004480850}
   - component: {fileID: 1047212678380562475}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -69,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -135041331
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b6b126f12ba57904a81a0d374042d890, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,8 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  baseMoveSpeed: 1
-  sprintMoveSpeed: 2
+  baseMoveSpeed: 3
+  sprintMoveSpeed: 5
   maxStamina: 100
   staminaDrainPerFrame: 20
   staminaRegenPerFrame: 30
@@ -144,3 +144,5 @@ MonoBehaviour:
   startTimer: 600
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
+  HealthBar: {fileID: 0}
+  StaminaBar: {fileID: 0}

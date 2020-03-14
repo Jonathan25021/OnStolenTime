@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class SmallMummyScript : EnemyScript
 {
-    private void attack()
-    {
+    public float attackDamage = 20;
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerScript>().takeDamage(attackDamage);
+        }
     }
 
 }

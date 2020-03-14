@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Pickup
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -14,6 +16,10 @@ TagManager:
   - UI
   - 
   - 
+  - MainSprites
+  - Projectiles
+  - Chests
+  - Pickups
   - 
   - 
   - 
@@ -33,12 +39,23 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - GroundTiles
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GroundTiles
+    uniqueID: 1743909561
+    locked: 0
+  - name: Pickups
+    uniqueID: 574288853
+    locked: 0
+  - name: Chests
+    uniqueID: 1083671511
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2688354901
+    locked: 0
+  - name: MainSprites
+    uniqueID: 4159925965
     locked: 0
