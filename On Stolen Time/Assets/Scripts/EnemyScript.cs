@@ -18,6 +18,10 @@ public class EnemyScript : MonoBehaviour
     private GameObject player;
     #endregion
 
+    #region AttackVars
+    private int damage = 10;
+    #endregion
+
     private State state;
     private enum State
     {
@@ -61,7 +65,7 @@ public class EnemyScript : MonoBehaviour
 
     private void attack()
     {
-
+        player.GetComponent<PlayerScript>().takeDamage(damage);
     }
 
     public void SetTarget(GameObject obj)
@@ -77,4 +81,10 @@ public class EnemyScript : MonoBehaviour
         }
         Debug.Log(state);
     }
+
+    public void takeDamageEnemy(float damageVal)
+    {
+        currHealth -= damageVal;
+    }
+
 }
