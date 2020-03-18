@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+
     #region healthVars
     public float maxHealth = 100;
     private float currHealth;
@@ -12,8 +14,8 @@ public class PlayerScript : MonoBehaviour
 
     #region movemenentVars
     private Vector2 movement;
-    public float baseMoveSpeed = 1;
-    public float sprintMoveSpeed = 2;
+    public float baseMoveSpeed = 3;
+    public float sprintMoveSpeed = 5;
     private Rigidbody2D playerRB;
     private Vector3 dir;
     // stamina
@@ -43,6 +45,11 @@ public class PlayerScript : MonoBehaviour
     public int currWeaponIndex;
     #endregion
 
+    #region UI
+    public Slider HealthBar;
+    public Slider StaminaBar;
+    #endregion
+
     private State state;
     private enum State
     {
@@ -59,6 +66,8 @@ public class PlayerScript : MonoBehaviour
         state = State.Normal;
         currTimer = startTimer;
         currWeaponIndex = 0;
+        HealthBar.value = healthRatio();
+        StaminaBar.value = staminaRatio();
     }
 
     void Update()
@@ -84,6 +93,8 @@ public class PlayerScript : MonoBehaviour
         {
             Die();
         }
+
+        // primary weapon attack
     }
     #endregion
 
@@ -127,7 +138,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * baseMoveSpeed;
         }
-
+        StaminaBar.value = staminaRatio();
     }
 
     private void lookAtMouse()
@@ -152,13 +163,17 @@ public class PlayerScript : MonoBehaviour
     private void roll()
     {
         transform.position += new Vector3(movement.x, movement.y) * 3f * Time.deltaTime;
-        currSlideSpeed -= currSlideSpeed * 2f * Time.deltaTime;
-        Debug.Log(currSlideSpeed);
+        currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
+        Debug.Log("Player rolling");
         if (currSlideSpeed < 1f)
         {
-            Debug.Log("done Rolling");
             state = State.Normal;
         }
+    }
+
+    private float staminaRatio()
+    {
+        return currStamina / maxStamina;
     }
     #endregion
 
@@ -178,15 +193,7 @@ public class PlayerScript : MonoBehaviour
             //swap  weapon at [0] with weapon at [1] in array? Constantly access weapon[0]? future = more weapons to cycle through?
         }
     }
-
-    private void attackCheck()
-    {
-        if (Input.GetKey(KeyCode.Space) && Weapons.Length != 0)
-        {
-            state = State.Attack;
-            Debug.Log("Attacking");
-        }
-    }
+    
     //kludgy weapon swap
     private void swapWeapon()
     {
@@ -209,7 +216,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            GetComponentInParent<EnemyScript>().takeDamageEnemy(dealingDamage);
+            GetComponentInParent<EnemyScript>().TakeDamage(dealingDamage);
         }
     }
 
@@ -217,9 +224,54 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GetComponentInParent<EnemyScript>().takeDamageEnemy(0);
+            GetComponentInParent<EnemyScript>().TakeDamage(0);
         }
 
+    }
+    private void attackCheck()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            attackWith(primaryWeapon);
+        }
+        else if (Input.GetMouseButton(1))
+        {
+            state = State.Attack;
+            attackWith(secondaryWeapon);
+        }
+
+    }
+
+    private void attackWith(GameObject weapon)
+    {
+        if (weapon.GetComponent<WeaponScript>().WeaponType() == 0)
+        {
+            StartCoroutine(MeleeAttackRoutine(weapon.GetComponent<MeleeWeaponScript>().damage));
+        }
+        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
+        {
+
+        }
+        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
+        {
+
+        }
+    }
+
+    IEnumerator MeleeAttackRoutine(float damage)
+    {
+        state = State.Attack;
+        Debug.Log("Cast hitbox now");
+        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 1);
+        for (int i = 0; i < info.Length; i++)
+        {
+            if (info[i].tag == "Enemy")
+            {
+                info[i].GetComponent<EnemyScript>().TakeDamage(damage);
+            }
+        }
+        yield return new WaitForSeconds(.75f);
+        state = State.Normal;
     }
     #endregion
 
@@ -229,16 +281,33 @@ public class PlayerScript : MonoBehaviour
         float adjustedDamage = damageVal * (defenseStat/100);
         currHealth -= adjustedDamage;
         Debug.Log("hurt; current health = " + currHealth);
+        if (state.Equals(State.Roll))
+        {
+            return;
+        }
+        currHealth -= damageVal;
+        HealthBar.value = healthRatio();
+        if (currHealth <= 0)
+        {
+            Die();
+        }
     }
 
     public void heal(float healVal)
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
+        HealthBar.value = healthRatio();
     }
     
+    private float healthRatio()
+    {
+        return currHealth / maxHealth;
+    }
+
     private void Die()
     {
-        Destroy(this.gameObject);
+        GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
+        //Destroy(this.gameObject);
         Debug.Log("player died");
     }
     #endregion

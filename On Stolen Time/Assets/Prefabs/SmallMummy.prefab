@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6561833630054420362}
   - component: {fileID: 6561833630054420360}
   - component: {fileID: 8184435157960122940}
-  m_Layer: 0
-  m_Name: SmallMummy 1
+  m_Layer: 8
+  m_Name: SmallMummy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.6
 --- !u!50 &6561833630054420362
 Rigidbody2D:
   serializedVersion: 4
@@ -107,8 +107,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -135041331
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 29163ba8d8d8ae941b9dc187d10ba801, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  baseMoveSpeed: 0.5
-  ChaseSpeed: 1
+  baseMoveSpeed: 1
+  ChaseSpeed: 3
+  attackDamage: 20
 --- !u!1001 &4615673317998323412
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,12 +147,17 @@ PrefabInstance:
     - target: {fileID: 4086818386071832878, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}
       propertyPath: m_Radius
-      value: 21.19
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 4187434796731072467, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}
       propertyPath: m_Name
       value: LineOfSight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4187434796731072467, guid: da638529fe3c6e14e8219c76b8be54c2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6606381707514384786, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}

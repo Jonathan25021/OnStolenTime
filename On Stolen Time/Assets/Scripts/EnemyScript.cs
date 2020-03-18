@@ -81,10 +81,18 @@ public class EnemyScript : MonoBehaviour
         }
         Debug.Log(state);
     }
-
-    public void takeDamageEnemy(float damageVal)
+    public void TakeDamage(float damage)
     {
-        currHealth -= damageVal;
+        currHealth -= damage;
+        Debug.Log(currHealth);
+        if (currHealth <= 0)
+        {
+            die();
+        }
     }
 
+    private void die()
+    {
+        Destroy(this.gameObject);
+    }
 }

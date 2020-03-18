@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class MeleeWeapon : MonoBehaviour
+public class ShieldScript : WeaponScript
 {
-    #region weaponVars;
-    public float damage;
-    public float attackSpeed;
-    
-    #endregion
     // Start is called before the first frame update
     void Start()
     {
@@ -19,5 +14,10 @@ public abstract class MeleeWeapon : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public override int WeaponType()
+    {
+        return 2;
     }
 }
