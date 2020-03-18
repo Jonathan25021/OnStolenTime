@@ -7,7 +7,7 @@ public class PlayerScript : MonoBehaviour
     #region healthVars
     public float maxHealth = 100;
     private float currHealth;
-    private float currTimer;
+    public float currTimer;
     #endregion
 
     #region movemenentVars
