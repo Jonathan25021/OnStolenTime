@@ -7,25 +7,38 @@ public class CountdownUI : MonoBehaviour
 {
     #region Player
     [SerializeField]
-    private Text uiText;
+    [Tooltip("The location for the sprite to be displayed.")]
+    private Image m_Image;
+
+    [SerializeField]
+    [Tooltip("The location for the time to be displayed.")]
+    private Text m_Text;
 
     [SerializeField]
     [Tooltip("The player that the timer corresponds to.")]
     private PlayerScript m_Player;
+
+    [SerializeField]
+    [Tooltip("The different sprite stages.")]
+    private Sprite[] m_Sprites;
     #endregion
 
-    private float timer;
+    int slice = 0;
 
-    // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
-        timer = 0;
+        int diffSprites = m_Sprites.Length;
+        slice = m_Player.startTimer / diffSprites;
+        m_Text.text = m_Player.startTimer.ToString();
+        m_Image.sprite = m_Sprites[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer = m_Player.currTimer;
-        uiText.text = timer.ToString("F");
+        float portion = m_Player.currTimer / slice;
+        int rounded = Mathf.RoundToInt(portion);
+        m_Image.sprite = m_Sprites[rounded - 1];
+        m_Text.text = (Mathf.Round(m_Player.currTimer * 100.0f) / 100.0f).ToString();
     }
 }
