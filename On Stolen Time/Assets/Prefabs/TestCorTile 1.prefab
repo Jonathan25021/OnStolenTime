@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2952492253131209758}
   - component: {fileID: 3870208536726631408}
-  - component: {fileID: -4113765962113032663}
-  - component: {fileID: 8626605815593672327}
+  - component: {fileID: -5766231313610537761}
+  - component: {fileID: -1058031533819680054}
   m_Layer: 31
-  m_Name: TestGroundTile
+  m_Name: TestCorTile 1
   m_TagString: FloorTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 1743909561
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4650dd8ca90b5fd41a63dde203b99b93, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 61c941082b1635d4dbb47b9890b6b59f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &-4113765962113032663
+--- !u!50 &-5766231313610537761
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -97,13 +97,13 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8626605815593672327
+--- !u!61 &-1058031533819680054
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

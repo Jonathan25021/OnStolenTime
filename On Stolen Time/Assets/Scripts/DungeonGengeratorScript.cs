@@ -9,6 +9,7 @@ public class DungeonGengeratorScript : MonoBehaviour
     public GameObject floorTile;
     private GameObject[,] boardPositionsFloor;
     public GameObject corridorTile;
+    public GameObject wallTile;
 
     public class SubDungeon
     {
@@ -253,13 +254,20 @@ public class DungeonGengeratorScript : MonoBehaviour
         }
         if (subDungeon.IAmLeaf())
         {
-            for (int i = (int)subDungeon.room.x; i < subDungeon.room.xMax; i++)
+            for (int i = (int)subDungeon.room.x - 1; i <= subDungeon.room.xMax; i++)
             {
-                for (int j = (int)subDungeon.room.y; j < subDungeon.room.yMax; j++)
+                for (int j = (int)subDungeon.room.y - 1; j <= subDungeon.room.yMax; j++)
                 {
-                    GameObject instance = Instantiate(floorTile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
-                    instance.transform.SetParent(transform);
-                    boardPositionsFloor[i, j] = instance;
+                    if (i == (int)subDungeon.room.x - 1 || j == (int)subDungeon.room.y - 1
+                        || i == subDungeon.room.xMax || j == subDungeon.room.yMax)
+                    {
+                        setTileHard(wallTile, i, j);
+                    }
+                    else
+                    {
+                        setTileHard(floorTile, i, j);
+                    }
+                    
                 }
             }
         }
@@ -282,19 +290,51 @@ public class DungeonGengeratorScript : MonoBehaviour
 
         foreach (Rect corridor in subDungeon.corridors)
         {
-            for (int i = (int)corridor.x; i < corridor.xMax; i++)
+            for (int i = (int)corridor.x - 1; i <= corridor.xMax; i++)
             {
-                for (int j = (int)corridor.y; j < corridor.yMax; j++)
+                for (int j = (int)corridor.y - 1; j <= corridor.yMax; j++)
                 {
-                    if (boardPositionsFloor[i, j] == null)
+                    if (i == (int)corridor.x - 1 || i == corridor.xMax
+                        || j == (int)corridor.y - 1 || j == corridor.yMax)
                     {
-                        GameObject instance = Instantiate(corridorTile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
-                        instance.transform.SetParent(transform);
-                        boardPositionsFloor[i, j] = instance;
+                        setTileSoft(wallTile, i, j);
                     }
+                    else if (boardPositionsFloor[i, j] != null && boardPositionsFloor[i, j].CompareTag("WallTile"))
+                    {
+                        Debug.Log("placed wallcorrtile");
+                        setTileHard(corridorTile, i, j);
+                    }
+                    else
+                    {
+                        setTileSoft(corridorTile, i, j);
+                    }
+                    
                 }
             }
         }
+    }
+
+    // places a tile if there is no tile already in that place
+    private void setTileSoft(GameObject tile, int i, int j)
+    {
+        if (boardPositionsFloor[i, j] == null)
+        {
+            GameObject instance = Instantiate(tile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
+            instance.transform.SetParent(transform);
+            boardPositionsFloor[i, j] = instance;
+        }
+    }
+
+    // places a tile even if there is a tile already in that place
+    private void setTileHard(GameObject tile, int i, int j)
+    {
+        if (boardPositionsFloor[i, j] != null)
+        {
+            Destroy(boardPositionsFloor[i, j]);
+        }
+        GameObject instance = Instantiate(tile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
+        instance.transform.SetParent(transform);
+        boardPositionsFloor[i, j] = instance;
     }
 
     void Start()
@@ -305,7 +345,7 @@ public class DungeonGengeratorScript : MonoBehaviour
         rootSubDungeon.CreateCorridorBetween(rootSubDungeon.left, rootSubDungeon.right);
 
         boardPositionsFloor = new GameObject[boardRows, boardColumns];
-        DrawCorridors(rootSubDungeon);
         DrawRooms(rootSubDungeon);
+        DrawCorridors(rootSubDungeon);
     }
 }

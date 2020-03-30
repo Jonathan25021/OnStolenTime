@@ -45,9 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardRows: 100
   boardColumns: 100
-  minRoomSize: 6
-  maxRoomSize: 10
+  minRoomSize: 10
+  maxRoomSize: 15
   floorTile: {fileID: 185571763658607565, guid: 7b92529f0cbd917408a22c265eff0039,
     type: 3}
   corridorTile: {fileID: 185571763658607565, guid: 7b92529f0cbd917408a22c265eff0039,
     type: 3}
+  wallTile: {fileID: 0}
