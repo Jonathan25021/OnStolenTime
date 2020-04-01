@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currTimer: 0
   baseMoveSpeed: 3
   sprintMoveSpeed: 5
   maxStamina: 100
@@ -140,9 +141,12 @@ MonoBehaviour:
   staminaRegenPerFrame: 30
   staminaTimeToRegen: 3
   rollStaminaCost: 40
-  slideSpeed: 3
+  slideSpeed: 7
   startTimer: 600
+  attackStat: 0
+  defenseStat: 0
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
+  currWeaponIndex: 0
   HealthBar: {fileID: 0}
   StaminaBar: {fileID: 0}

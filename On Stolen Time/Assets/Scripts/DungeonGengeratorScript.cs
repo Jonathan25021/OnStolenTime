@@ -301,7 +301,6 @@ public class DungeonGengeratorScript : MonoBehaviour
                     }
                     else if (boardPositionsFloor[i, j] != null && boardPositionsFloor[i, j].CompareTag("WallTile"))
                     {
-                        Debug.Log("placed wallcorrtile");
                         setTileHard(corridorTile, i, j);
                     }
                     else

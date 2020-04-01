@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     private float currSlideSpeed;
     // countdown
     public int startTimer = 600;
+    private GameObject mainCamera;
     #endregion
 
     #region combatVars
@@ -39,8 +40,6 @@ public class PlayerScript : MonoBehaviour
     public int defenseStat;
     public GameObject primaryWeapon;
     public GameObject secondaryWeapon;
-    public Weapon[] Weapons;
-    public Weapon currWeapon;
     private float dealingDamage;
     public int currWeaponIndex;
     #endregion
@@ -68,10 +67,13 @@ public class PlayerScript : MonoBehaviour
         currWeaponIndex = 0;
         HealthBar.value = healthRatio();
         StaminaBar.value = staminaRatio();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void Update()
     {
+        Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
+        moveMainCamera();
         switch (state)
         {
             case State.Normal:
@@ -79,13 +81,12 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
-                swapCheck();
                 break;
             case State.Roll:
                 roll();
                 break;
             case State.Attack:
-                attackNow();
+                movementMaster();
                 break;
         }
         countDown();
@@ -149,6 +150,21 @@ public class PlayerScript : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
+    private void moveMainCamera()
+    {
+        if (Input.GetKey(KeyCode.F))
+        {
+            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10) + dir / 100, .125f);
+            mainCamera.transform.position = panPosition;
+        }
+        else
+        {
+            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10), .125f);
+            mainCamera.transform.position = panPosition;
+        }
+        
+    }
+
     private void rollCheck()
     {
         if (Input.GetKey(KeyCode.R) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero))
@@ -162,7 +178,7 @@ public class PlayerScript : MonoBehaviour
 
     private void roll()
     {
-        transform.position += new Vector3(movement.x, movement.y) * 3f * Time.deltaTime;
+        transform.position += new Vector3(movement.x, movement.y).normalized * currSlideSpeed * Time.deltaTime;
         currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
         Debug.Log("Player rolling");
         if (currSlideSpeed < 1f)
@@ -178,60 +194,11 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region combatFuncs
-    private void attackNow()
-    {
-        Debug.Log("Attacking now");
-        dealingDamage = Weapons[currWeaponIndex].damage * (attackStat / 100);
-    }
-
-    private void swapCheck()
-    {
-        if (Input.GetKey(KeyCode.P) && Weapons.Length > 0)
-        {
-            Debug.Log("can swap weapons");
-            swapWeapon();
-            //swap  weapon at [0] with weapon at [1] in array? Constantly access weapon[0]? future = more weapons to cycle through?
-        }
-    }
-    
-    //kludgy weapon swap
-    private void swapWeapon()
-    {
-        if (currWeaponIndex == 0)
-        {
-            Weapons[currWeaponIndex].inuse = false;
-            currWeaponIndex = 1;
-            Weapons[currWeaponIndex].inuse = true;
-            Debug.Log("weapon swapped");
-        } else
-        {
-            Debug.Log("weapon swapped!");
-            Weapons[currWeaponIndex].inuse = false;
-            currWeaponIndex = 0;
-            Weapons[currWeaponIndex].inuse = true;
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            GetComponentInParent<EnemyScript>().TakeDamage(dealingDamage);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            GetComponentInParent<EnemyScript>().TakeDamage(0);
-        }
-
-    }
     private void attackCheck()
     {
         if (Input.GetMouseButton(0))
         {
+            state = State.Attack;
             attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
@@ -252,7 +219,7 @@ public class PlayerScript : MonoBehaviour
         {
 
         }
-        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
+        else if (weapon.GetComponent<WeaponScript>().WeaponType() == 2)
         {
 
         }
@@ -262,7 +229,7 @@ public class PlayerScript : MonoBehaviour
     {
         state = State.Attack;
         Debug.Log("Cast hitbox now");
-        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 1);
+        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
         for (int i = 0; i < info.Length; i++)
         {
             if (info[i].tag == "Enemy")
