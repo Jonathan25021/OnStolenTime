@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6561833630054420367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.83, y: 0.33, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1990801336920274758}
   m_Father: {fileID: 0}
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   baseMoveSpeed: 1
-  ChaseSpeed: 3
+  ChaseSpeed: 2
   attackDamage: 20
 --- !u!1001 &4615673317998323412
 PrefabInstance:
@@ -147,7 +147,7 @@ PrefabInstance:
     - target: {fileID: 4086818386071832878, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}
       propertyPath: m_Radius
-      value: 70
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 4187434796731072467, guid: da638529fe3c6e14e8219c76b8be54c2,
         type: 3}

@@ -9,11 +9,12 @@ public class CameraScript : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, -10);
+        
     }
 }

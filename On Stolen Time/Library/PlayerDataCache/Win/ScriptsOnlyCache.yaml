@@ -3,6 +3,8 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BasicSwordScript
     - CameraScript
+    - CountdownUI
+    - DungeonGengeratorScript
     - GameManager
     - LineOfSightScript
     - PlayerScript
@@ -16,13 +18,15 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
+    - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Slider
+    - UnityEngine.UI.Text
   sceneClasses:
-    Assets/Scenes/PlayTestScene.unity:
+    Assets/Scenes/PlayTestScene1.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -50,6 +54,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9682}
     - Class: 114
+      Script: {instanceID: 9838}
+    - Class: 114
       Script: {instanceID: 9878}
     - Class: 114
       Script: {instanceID: 9936}
@@ -60,14 +66,20 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10126}
     - Class: 114
-      Script: {instanceID: 10912}
+      Script: {instanceID: 10914}
     - Class: 114
-      Script: {instanceID: 11142}
+      Script: {instanceID: 11048}
     - Class: 114
-      Script: {instanceID: 11200}
+      Script: {instanceID: 11146}
     - Class: 114
-      Script: {instanceID: 11550}
+      Script: {instanceID: 11204}
+    - Class: 114
+      Script: {instanceID: 11374}
+    - Class: 114
+      Script: {instanceID: 11554}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -216,7 +228,7 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 01dbf49ce37598048a1d035fa1407823
+      Hash: f886191820ee9439dbe0f564cf817f71
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BasicSwordScript
@@ -300,7 +312,7 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
-      Hash: 01dbf49ce37598048a1d035fa1407823
+      Hash: 85c091ff0f9ad86c0f2565661b8328e8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RangedWeaponScript
@@ -324,7 +336,7 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: 01dbf49ce37598048a1d035fa1407823
+      Hash: f886191820ee9439dbe0f564cf817f71
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShieldScript
@@ -358,6 +370,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 85c091ff0f9ad86c0f2565661b8328e8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BasicGunScript
   - hash:
       serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
@@ -408,7 +426,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: ffed626cbc45a899304f0776ce38919f
+      Hash: 9328dc3e3f27042fea33d384985065d4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerScript
@@ -418,6 +436,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: TimelineAsset
+  - hash:
+      serializedVersion: 2
+      Hash: df74eb2c3f33a57610d5e0a88849b644
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CountdownUI
   - hash:
       serializedVersion: 2
       Hash: 167507cc517e86710b484fa2e614d30f
@@ -468,7 +492,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: 23ad647f32e295c9181c351c2ac476b0
+      Hash: 4ba480ed1b36403db0c10eeda18007c9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DungeonGengeratorScript
@@ -564,5 +588,5 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 5
   scenePathNames:
-  - Assets/Scenes/PlayTestScene.unity
+  - Assets/Scenes/PlayTestScene1.unity
   playerPath: C:/Users/jonat/OneDrive/Desktop/OnStolenTime/On Stolen Time.exe

@@ -31,6 +31,8 @@ public class CountdownUI : MonoBehaviour
         slice = m_Player.startTimer / diffSprites;
         m_Text.text = m_Player.startTimer.ToString();
         m_Image.sprite = m_Sprites[0];
+        m_Image.transform.position = new Vector2(50, 70);
+        m_Text.transform.position = new Vector2(30, 30);
     }
 
     // Update is called once per frame

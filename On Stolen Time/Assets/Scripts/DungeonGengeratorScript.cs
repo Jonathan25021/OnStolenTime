@@ -6,10 +6,13 @@ public class DungeonGengeratorScript : MonoBehaviour
 { 
     public int boardRows, boardColumns;
     public int minRoomSize, maxRoomSize;
-    public GameObject floorTile;
+    public GameObject[] floorTiles;
+    public GameObject floorTile, floorTileN, floorTileNE, floorTileE, floorTileSE, floorTileS, floorTileSW, floorTileW, floorTileNW;
     private GameObject[,] boardPositionsFloor;
     public GameObject corridorTile;
     public GameObject wallTile;
+    private bool playerSpawned;
+    public GameObject[] enemies;
 
     public class SubDungeon
     {
@@ -265,12 +268,56 @@ public class DungeonGengeratorScript : MonoBehaviour
                     }
                     else
                     {
-                        setTileHard(floorTile, i, j);
+                        if (i == (int)subDungeon.room.x && j == (int)subDungeon.room.y)
+                        {
+                            setTileHard(floorTileSW, i, j);
+                        }
+                        else if (i == (int)subDungeon.room.x && j == subDungeon.room.yMax - 1)
+                        {
+                            setTileHard(floorTileNW, i, j);
+                        }
+                        else if (i == subDungeon.room.xMax - 1 && j == (int)subDungeon.room.y)
+                        {
+                            setTileHard(floorTileSE, i, j);
+                        }
+                        else if (i == subDungeon.room.xMax - 1 && j == subDungeon.room.yMax - 1)
+                        {
+                            setTileHard(floorTileNE, i, j);
+                        }
+                        else if (i == (int)subDungeon.room.x)
+                        {
+                            setTileHard(floorTileW, i, j);
+                        }
+                        else if (i == subDungeon.room.xMax - 1)
+                        {
+                            setTileHard(floorTileE, i, j);
+                        }
+                        else if (j == (int)subDungeon.room.y)
+                        {
+                            setTileHard(floorTileS, i, j);
+                        }
+                        else if (j == subDungeon.room.yMax - 1)
+                        {
+                            setTileHard(floorTileN, i, j);
+                        }
+                        else
+                        {
+                            setTileHard(floorTiles[Random.Range(0, floorTiles.Length - 1)], i, j);
+                        }
+                        if (Random.Range(0,75) == 0)
+                        {
+                            Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(i, j, 0f), Quaternion.identity);
+                        }
                     }
                     
                 }
             }
+            if (!playerSpawned)
+            {
+                GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2((subDungeon.room.x + subDungeon.room.xMax)/2, (subDungeon.room.y + subDungeon.room.yMax) / 2);
+            }
         }
+        
         else
         {
             DrawRooms(subDungeon.left);
@@ -338,6 +385,7 @@ public class DungeonGengeratorScript : MonoBehaviour
 
     void Start()
     {
+        playerSpawned = false;
         SubDungeon rootSubDungeon = new SubDungeon(new Rect(0, 0, boardRows, boardColumns));
         CreateBSP(rootSubDungeon);
         rootSubDungeon.CreateRoom();

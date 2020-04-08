@@ -40,8 +40,9 @@ public class PlayerScript : MonoBehaviour
     public int defenseStat;
     public GameObject primaryWeapon;
     public GameObject secondaryWeapon;
-    private float dealingDamage;
-    public int currWeaponIndex;
+    private int currWeapon;
+    private bool rangeAttack;
+    private float panRange;
     #endregion
 
     #region UI
@@ -64,7 +65,6 @@ public class PlayerScript : MonoBehaviour
         currSlideSpeed = slideSpeed;
         state = State.Normal;
         currTimer = startTimer;
-        currWeaponIndex = 0;
         HealthBar.value = healthRatio();
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -72,7 +72,6 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Camera.main.WorldToScreenPoint(transform.position));
         moveMainCamera();
         switch (state)
         {
@@ -90,12 +89,11 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         countDown();
-        if (currHealth == 0)
+        if (currHealth <= 0)
         {
             Die();
         }
-
-        // primary weapon attack
+        
     }
     #endregion
 
@@ -113,7 +111,7 @@ public class PlayerScript : MonoBehaviour
     #region movementFuncs
     private void movementMaster()
     {
-        sprinting = Input.GetKey(KeyCode.LeftShift) && currStamina > 0;
+        sprinting = Input.GetKey(KeyCode.LeftShift) && currStamina > 0 && state != State.Attack;
         if (sprinting && !playerRB.velocity.Equals(Vector2.zero))
         {
             currStamina = Mathf.Clamp(currStamina - (staminaDrainPerFrame * Time.deltaTime), 0.0f, maxStamina);
@@ -135,6 +133,10 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * sprintMoveSpeed;
         }
+        else if (state == State.Attack)
+        {
+            playerRB.velocity = .5f * movement * baseMoveSpeed;
+        }
         else
         {
             playerRB.velocity = movement * baseMoveSpeed;
@@ -152,22 +154,34 @@ public class PlayerScript : MonoBehaviour
 
     private void moveMainCamera()
     {
-        if (Input.GetKey(KeyCode.F))
-        {
-            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10) + dir / 100, .125f);
-            mainCamera.transform.position = panPosition;
-        }
-        else
-        {
+        //if (Input.GetKey(KeyCode.F))
+        //{
+        //    pan(100000);
+        //}
+        //else
+        //{
             Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10), .125f);
             mainCamera.transform.position = panPosition;
-        }
+        //}
         
+    }
+
+    private void panCheck()
+    {
+        if (rangeAttack)
+        {
+            pan(panRange);
+        }
+    }
+    private void pan(float panFactor)
+    {
+            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10) + dir / panFactor * Screen.width, .125f);
+            mainCamera.transform.position = panPosition;
     }
 
     private void rollCheck()
     {
-        if (Input.GetKey(KeyCode.R) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero))
+        if (Input.GetKey(KeyCode.Space) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero))
         {
             staminaRegenTimer = 0f;
             currStamina -= rollStaminaCost;
@@ -178,6 +192,7 @@ public class PlayerScript : MonoBehaviour
 
     private void roll()
     {
+        playerRB.freezeRotation = true;
         transform.position += new Vector3(movement.x, movement.y).normalized * currSlideSpeed * Time.deltaTime;
         currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
         Debug.Log("Player rolling");
@@ -185,6 +200,7 @@ public class PlayerScript : MonoBehaviour
         {
             state = State.Normal;
         }
+        playerRB.freezeRotation = false;
     }
 
     private float staminaRatio()
@@ -199,11 +215,13 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             state = State.Attack;
+            currWeapon = 0;
             attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
         {
             state = State.Attack;
+            currWeapon = 1;
             attackWith(secondaryWeapon);
         }
 
@@ -213,11 +231,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (weapon.GetComponent<WeaponScript>().WeaponType() == 0)
         {
-            StartCoroutine(MeleeAttackRoutine(weapon.GetComponent<MeleeWeaponScript>().damage));
+            
+            StartCoroutine(MeleeAttackRoutine(weapon));
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
         {
-
+            Debug.Log("beggining ranged attack");
+            
+            StartCoroutine(RangedAttackRoutine(weapon));
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 2)
         {
@@ -225,19 +246,31 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    IEnumerator MeleeAttackRoutine(float damage)
+    IEnumerator MeleeAttackRoutine(GameObject weapon)
     {
         state = State.Attack;
         Debug.Log("Cast hitbox now");
+        playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
         for (int i = 0; i < info.Length; i++)
         {
             if (info[i].tag == "Enemy")
             {
-                info[i].GetComponent<EnemyScript>().TakeDamage(damage);
+                info[i].GetComponent<EnemyScript>().TakeDamage(weapon.GetComponent<MeleeWeaponScript>().Damage());
             }
         }
-        yield return new WaitForSeconds(.75f);
+        yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
+        playerRB.freezeRotation = false;
+        state = State.Normal;
+    }
+
+    IEnumerator RangedAttackRoutine(GameObject weapon)
+    {
+        state = State.Attack;
+        rangeAttack = true;
+        panRange = weapon.GetComponent<RangedWeaponScript>().RangeFactor();
+        yield return null;
+        //yield return new WaitForSeconds(weapon.GetComponent<RangedWeaponScript>().AttackSpeed());
         state = State.Normal;
     }
     #endregion
