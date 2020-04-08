@@ -56,6 +56,10 @@ public class PlayerScript : MonoBehaviour
         Normal, Roll, Attack
     }
 
+    #region animation_components
+    public Animator anim;
+    #endregion
+
     #region UnityFuncs
     void Start()
     {
@@ -129,9 +133,20 @@ public class PlayerScript : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         movement = new Vector2(moveHorizontal, moveVertical);
+        if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            anim.SetBool("moving", true);
+        }
+        else
+        {
+            anim.SetBool("moving", false);
+        }
+
         if (sprinting)
         {
             playerRB.velocity = movement * sprintMoveSpeed;
+            //Debug.Log(sprintMoveSpeed);
+            anim.SetFloat("walkSpeed", 2);
         }
         else if (state == State.Attack)
         {
@@ -140,6 +155,8 @@ public class PlayerScript : MonoBehaviour
         else
         {
             playerRB.velocity = movement * baseMoveSpeed;
+            //Debug.Log(baseMoveSpeed);
+            anim.SetFloat("walkSpeed", 1);
         }
         StaminaBar.value = staminaRatio();
     }
@@ -186,6 +203,9 @@ public class PlayerScript : MonoBehaviour
             staminaRegenTimer = 0f;
             currStamina -= rollStaminaCost;
             currSlideSpeed = slideSpeed;
+            //anim.SetFloat("sSpeed", currSlideSpeed);
+            //Debug.Log(currSlideSpeed);
+            anim.SetTrigger("rolling");
             state = State.Roll;
         }
     }
@@ -198,6 +218,10 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Player rolling");
         if (currSlideSpeed < 1f)
         {
+            anim.SetTrigger("rolling");
+            //Debug.Log(currSlideSpeed);
+            //anim.SetFloat("sSpeed", currSlideSpeed);
+            Debug.Log("Player stopped rolling");
             state = State.Normal;
         }
         playerRB.freezeRotation = false;
@@ -216,12 +240,14 @@ public class PlayerScript : MonoBehaviour
         {
             state = State.Attack;
             currWeapon = 0;
+            anim.SetTrigger("leftAttack");
             attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
         {
             state = State.Attack;
             currWeapon = 1;
+            //anim.SetTrigger("leftAttack");
             attackWith(secondaryWeapon);
         }
 

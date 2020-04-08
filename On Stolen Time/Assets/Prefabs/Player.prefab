@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1959891490442935949}
   - component: {fileID: 8671708813004480850}
   - component: {fileID: 1047212678380562475}
+  - component: {fileID: 2220058022451399707}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -147,5 +148,28 @@ MonoBehaviour:
   defenseStat: 0
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
+  Weapons: []
+  currWeapon: {fileID: 0}
+  currWeaponIndex: 0
   HealthBar: {fileID: 0}
   StaminaBar: {fileID: 0}
+  anim: {fileID: 2220058022451399707}
+--- !u!95 &2220058022451399707
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4613374257381417753}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40d2f2ddd5b14c248ba0e452e428739d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
