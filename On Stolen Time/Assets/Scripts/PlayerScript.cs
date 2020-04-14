@@ -57,12 +57,13 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region animation_components
-    public Animator anim;
+    Animator anim;
     #endregion
 
     #region UnityFuncs
     void Start()
     {
+        anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
         currHealth = maxHealth;
@@ -146,7 +147,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * sprintMoveSpeed;
             //Debug.Log(sprintMoveSpeed);
-            anim.SetFloat("walkSpeed", 2);
+            anim.SetFloat("moveSpeed", 2);
         }
         else if (state == State.Attack)
         {
@@ -156,7 +157,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * baseMoveSpeed;
             //Debug.Log(baseMoveSpeed);
-            anim.SetFloat("walkSpeed", 1);
+            anim.SetFloat("moveSpeed", 1);
         }
         StaminaBar.value = staminaRatio();
     }
@@ -203,9 +204,6 @@ public class PlayerScript : MonoBehaviour
             staminaRegenTimer = 0f;
             currStamina -= rollStaminaCost;
             currSlideSpeed = slideSpeed;
-            //anim.SetFloat("sSpeed", currSlideSpeed);
-            //Debug.Log(currSlideSpeed);
-            anim.SetTrigger("rolling");
             state = State.Roll;
         }
     }
@@ -213,14 +211,20 @@ public class PlayerScript : MonoBehaviour
     private void roll()
     {
         playerRB.freezeRotation = true;
+        anim.SetFloat("sSpeed", currSlideSpeed);
+        
+        //Debug.Log(currSlideSpeed);
+        anim.SetBool("rolling", true);
         transform.position += new Vector3(movement.x, movement.y).normalized * currSlideSpeed * Time.deltaTime;
+        anim.SetFloat("PosY", transform.position.y);
+        anim.SetFloat("PosX", transform.position.x);
         currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
         Debug.Log("Player rolling");
         if (currSlideSpeed < 1f)
         {
-            anim.SetTrigger("rolling");
+            anim.SetBool("rolling", false);
             //Debug.Log(currSlideSpeed);
-            //anim.SetFloat("sSpeed", currSlideSpeed);
+            anim.SetFloat("sSpeed", currSlideSpeed);
             Debug.Log("Player stopped rolling");
             state = State.Normal;
         }

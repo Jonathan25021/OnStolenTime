@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6561833630054420362}
   - component: {fileID: 6561833630054420360}
   - component: {fileID: 8184435157960122940}
+  - component: {fileID: -9030268415529432886}
   m_Layer: 8
   m_Name: SmallMummy
   m_TagString: Enemy
@@ -137,6 +138,25 @@ MonoBehaviour:
   baseMoveSpeed: 1
   ChaseSpeed: 2
   attackDamage: 20
+--- !u!95 &-9030268415529432886
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561833630054420367}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d75ce9a0fa25d3147832c86a118f42ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4615673317998323412
 PrefabInstance:
   m_ObjectHideFlags: 0
