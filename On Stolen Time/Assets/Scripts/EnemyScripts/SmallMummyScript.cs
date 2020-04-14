@@ -13,5 +13,4 @@ public class SmallMummyScript : EnemyScript
             collision.gameObject.GetComponent<PlayerScript>().takeDamage(attackDamage);
         }
     }
-
 }
