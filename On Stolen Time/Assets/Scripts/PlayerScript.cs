@@ -30,9 +30,6 @@ public class PlayerScript : MonoBehaviour
     public float rollStaminaCost = 40;
     public float slideSpeed = 3f;
     private float currSlideSpeed;
-    // countdown
-    public int startTimer = 600;
-    private GameObject mainCamera;
     #endregion
 
     #region combatVars
@@ -43,6 +40,14 @@ public class PlayerScript : MonoBehaviour
     private int currWeapon;
     private bool rangeAttack;
     private float panRange;
+    #endregion
+
+    #region time
+    // countdown
+    public int startTimer = 600;
+    private GameObject mainCamera;
+    private Transform rewindedPos;
+    private Queue<Transform> positions = new Queue<Transform>();
     #endregion
 
     #region UI
@@ -73,6 +78,7 @@ public class PlayerScript : MonoBehaviour
         HealthBar.value = healthRatio();
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        rewindedPos = transform;
     }
 
     void Update()
@@ -85,6 +91,7 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
+                rewind();
                 break;
             case State.Roll:
                 roll();
@@ -105,10 +112,27 @@ public class PlayerScript : MonoBehaviour
     #region timeFuncs
     private void countDown()
     {
-        currTimer -= Time.deltaTime;
         if (currTimer < 0)
         {
             Die();
+        }
+        if (positions.Count != 500)
+        {
+            positions.Enqueue(transform);
+        } else
+        {
+            rewindedPos = positions.Dequeue();
+            positions.Enqueue(transform);
+        }
+        currTimer -= Time.deltaTime;
+    }
+
+    private void rewind()
+    {
+        if (Input.GetKey(KeyCode.Z) && currTimer > 0)
+        {
+            gameObject.transform.position = rewindedPos.position;
+            currTimer -= 5;
         }
     }
     #endregion
