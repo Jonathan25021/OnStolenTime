@@ -53,6 +53,8 @@ public class PlayerScript : MonoBehaviour
     private float cost = 0;
     private float rewindedHealth;
     private bool slow = false;
+    private GameObject rewindedFirstWeapon;
+    private GameObject rewindedSecondWeapon;
     #endregion
 
 
@@ -182,6 +184,8 @@ public class PlayerScript : MonoBehaviour
             rewindedHealth = currHealth;
             toGo = true;
             cost = currTimer;
+            rewindedFirstWeapon = primaryWeapon;
+            rewindedSecondWeapon = secondaryWeapon;
         } else if (Input.GetKey(KeyCode.Z) && currTimer > 10 && lastUsed <= 0 && toGo)
         {
             Debug.Log("It's rewind time!");
@@ -191,6 +195,8 @@ public class PlayerScript : MonoBehaviour
             currTimer -= 2 * (cost - currTimer);
             currHealth = rewindedHealth;
             HealthBar.value = healthRatio();
+            primaryWeapon = rewindedFirstWeapon;
+            secondaryWeapon = rewindedSecondWeapon;
             lastUsed = 2;
         }
     }
