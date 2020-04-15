@@ -98,6 +98,7 @@ MonoBehaviour:
   drops:
   - {fileID: 6561833630054420367, guid: 830a890f339715540bb50e91ef06391c, type: 3}
   - {fileID: 6561833630054420367, guid: 830a890f339715540bb50e91ef06391c, type: 3}
+  opened: {fileID: 21300000, guid: eb221a9536d964358a406837f25d9193, type: 3}
 --- !u!50 &5577606489480645269
 Rigidbody2D:
   serializedVersion: 4
