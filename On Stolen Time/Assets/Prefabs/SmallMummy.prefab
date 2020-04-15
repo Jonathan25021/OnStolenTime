@@ -135,8 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  baseMoveSpeed: 1
-  ChaseSpeed: 2
+  baseMoveSpeed: 2
   attackDamage: 20
 --- !u!95 &-9030268415529432886
 Animator:

@@ -45,11 +45,19 @@ public class PlayerScript : MonoBehaviour
     #region time
     // countdown
     public int startTimer = 600;
+    public int rate = 1;
     private GameObject mainCamera;
     private Vector2 rewindedPos;
     private float lastUsed = 0;
     private bool toGo = false;
     private float cost = 0;
+    private float rewindedHealth;
+    private bool slow = false;
+    #endregion
+
+
+    #region Enemies
+    private GameObject[] allEnemies;
     #endregion
 
     #region UI
@@ -81,6 +89,7 @@ public class PlayerScript : MonoBehaviour
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         rewindedPos = transform.position;
+        allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
@@ -104,6 +113,7 @@ public class PlayerScript : MonoBehaviour
         }
         countDown();
         rewind();
+        toggleSpeed();
         if (currHealth <= 0)
         {
             Die();
@@ -119,8 +129,48 @@ public class PlayerScript : MonoBehaviour
         {
             Die();
         }
-        currTimer -= Time.deltaTime;
+        currTimer -= rate * Time.deltaTime;
         lastUsed -= Time.deltaTime;
+    }
+
+    private void toggleSpeed()
+    {
+        if (Input.GetKey(KeyCode.T) && !slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().slow();
+            }
+            slow = true;
+            rate = 2;
+        } else if (Input.GetKey(KeyCode.T) && slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().speed();
+            }
+            slow = false;
+            rate = 1;
+        }
+        if (Input.GetKey(KeyCode.G) && !slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().slow();
+            }
+            baseMoveSpeed = 2;
+            slow = true;
+            rate = 2;
+        } else if (Input.GetKey(KeyCode.G) && slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().speed();
+            }
+            baseMoveSpeed = 3;
+            slow = false;
+            rate = 1;
+        }
     }
 
     private void rewind()
@@ -129,6 +179,7 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("Oh that's hot!");
             rewindedPos = transform.position;
+            rewindedHealth = currHealth;
             toGo = true;
             cost = currTimer;
         } else if (Input.GetKey(KeyCode.Z) && currTimer > 10 && lastUsed <= 0 && toGo)
@@ -138,6 +189,8 @@ public class PlayerScript : MonoBehaviour
             Debug.Log(transform.position);
             transform.position = rewindedPos;
             currTimer -= 2 * (cost - currTimer);
+            currHealth = rewindedHealth;
+            HealthBar.value = healthRatio();
             lastUsed = 2;
         }
     }

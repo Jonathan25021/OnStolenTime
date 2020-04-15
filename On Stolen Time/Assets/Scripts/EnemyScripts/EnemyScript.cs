@@ -11,8 +11,7 @@ public class EnemyScript : MonoBehaviour
 
     #region MovemenetVars
     private Vector2 movement;
-    public float baseMoveSpeed = 1;
-    public float ChaseSpeed = 2;
+    public float baseMoveSpeed = 2;
     private Rigidbody2D enemyRB;
     private Vector3 dir;
     private GameObject player;
@@ -71,7 +70,17 @@ public class EnemyScript : MonoBehaviour
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         movement = dir.normalized;
-        enemyRB.velocity = movement.normalized * ChaseSpeed;
+        enemyRB.velocity = movement.normalized * baseMoveSpeed;
+    }
+
+    public void slow()
+    {
+        baseMoveSpeed = 1;
+    }
+
+    public void speed()
+    {
+        baseMoveSpeed = 2;
     }
 
     private void attack()
