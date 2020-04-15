@@ -46,8 +46,10 @@ public class PlayerScript : MonoBehaviour
     // countdown
     public int startTimer = 600;
     private GameObject mainCamera;
-    private Transform rewindedPos;
-    private Queue<Transform> positions = new Queue<Transform>();
+    private Vector2 rewindedPos;
+    private float lastUsed = 0;
+    private bool toGo = false;
+    private float cost = 0;
     #endregion
 
     #region UI
@@ -78,7 +80,7 @@ public class PlayerScript : MonoBehaviour
         HealthBar.value = healthRatio();
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        rewindedPos = transform;
+        rewindedPos = transform.position;
     }
 
     void Update()
@@ -91,7 +93,7 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
-                rewind();
+                
                 break;
             case State.Roll:
                 roll();
@@ -101,6 +103,7 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         countDown();
+        rewind();
         if (currHealth <= 0)
         {
             Die();
@@ -116,23 +119,26 @@ public class PlayerScript : MonoBehaviour
         {
             Die();
         }
-        if (positions.Count != 500)
-        {
-            positions.Enqueue(transform);
-        } else
-        {
-            rewindedPos = positions.Dequeue();
-            positions.Enqueue(transform);
-        }
         currTimer -= Time.deltaTime;
+        lastUsed -= Time.deltaTime;
     }
 
     private void rewind()
     {
-        if (Input.GetKey(KeyCode.Z) && currTimer > 0)
+        if (Input.GetKey(KeyCode.X))
         {
-            gameObject.transform.position = rewindedPos.position;
-            currTimer -= 5;
+            Debug.Log("Oh that's hot!");
+            rewindedPos = transform.position;
+            toGo = true;
+            cost = currTimer;
+        } else if (Input.GetKey(KeyCode.Z) && currTimer > 10 && lastUsed <= 0 && toGo)
+        {
+            Debug.Log("It's rewind time!");
+            Debug.Log(rewindedPos);
+            Debug.Log(transform.position);
+            transform.position = rewindedPos;
+            currTimer -= 2 * (cost - currTimer);
+            lastUsed = 2;
         }
     }
     #endregion
