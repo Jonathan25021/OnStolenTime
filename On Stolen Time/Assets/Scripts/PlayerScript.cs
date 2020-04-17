@@ -171,15 +171,15 @@ public class PlayerScript : MonoBehaviour
 
     private void moveMainCamera()
     {
-        //if (Input.GetKey(KeyCode.F))
-        //{
-        //    pan(100000);
-        //}
-        //else
-        //{
+        if (Input.GetKey(KeyCode.F))
+        {
+            pan(100000);
+        }
+        else
+        {
             Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10), .125f);
             mainCamera.transform.position = panPosition;
-        //}
+        }
         
     }
 
