@@ -28,8 +28,10 @@ public class PlayerScript : MonoBehaviour
     public float staminaTimeToRegen = 3.0f;
     // roll
     public float rollStaminaCost = 40;
-    public float slideSpeed = 3f;
+    public float slideSpeed = 10f;
     private float currSlideSpeed;
+    public float rollCooldownMax = .5f;
+    private float rollCooldown;
     // countdown
     public int startTimer = 600;
     private GameObject mainCamera;
@@ -43,6 +45,7 @@ public class PlayerScript : MonoBehaviour
     private int currWeapon;
     private bool rangeAttack;
     private float panRange;
+    private GameObject sword;
     #endregion
 
     #region UI
@@ -72,6 +75,9 @@ public class PlayerScript : MonoBehaviour
         HealthBar.value = healthRatio();
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        rollCooldown = 0;
+        sword = this.transform.GetChild(0).gameObject;
+        sword.transform.localScale = new Vector3(0, 0, 2);
     }
 
     void Update()
@@ -146,7 +152,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * sprintMoveSpeed;
             //Debug.Log(sprintMoveSpeed);
-            anim.SetFloat("walkSpeed", 2);
+            anim.SetFloat("moveSpeed", 2);
         }
         else if (state == State.Attack)
         {
@@ -156,7 +162,7 @@ public class PlayerScript : MonoBehaviour
         {
             playerRB.velocity = movement * baseMoveSpeed;
             //Debug.Log(baseMoveSpeed);
-            anim.SetFloat("walkSpeed", 1);
+            anim.SetFloat("moveSpeed", 1);
         }
         StaminaBar.value = staminaRatio();
     }
@@ -198,29 +204,35 @@ public class PlayerScript : MonoBehaviour
 
     private void rollCheck()
     {
-        if (Input.GetKey(KeyCode.Space) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero))
+        if (rollCooldown > 0)
         {
+            rollCooldown -= Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.Space) && currStamina - rollStaminaCost >= 0 && !movement.Equals(Vector2.zero) && rollCooldown <= 0)
+        {
+            anim.SetBool("moving", false);
+            anim.SetTrigger("rolling");
             staminaRegenTimer = 0f;
             currStamina -= rollStaminaCost;
             currSlideSpeed = slideSpeed;
-            //anim.SetFloat("sSpeed", currSlideSpeed);
             //Debug.Log(currSlideSpeed);
-            anim.SetTrigger("rolling");
+            rollCooldown = rollCooldownMax;
             state = State.Roll;
         }
     }
 
     private void roll()
     {
+
+        var angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg + 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         playerRB.freezeRotation = true;
         transform.position += new Vector3(movement.x, movement.y).normalized * currSlideSpeed * Time.deltaTime;
-        currSlideSpeed -= currSlideSpeed * 3f * Time.deltaTime;
-        Debug.Log("Player rolling");
+        currSlideSpeed -= currSlideSpeed * 6f * Time.deltaTime;
+        Debug.Log(currSlideSpeed);
         if (currSlideSpeed < 1f)
         {
-            anim.SetTrigger("rolling");
             //Debug.Log(currSlideSpeed);
-            //anim.SetFloat("sSpeed", currSlideSpeed);
             Debug.Log("Player stopped rolling");
             state = State.Normal;
         }
@@ -278,6 +290,17 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Cast hitbox now");
         playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
+        Vector3 start = new Vector3(2, 0, 2);
+        Vector3 end = new Vector3(2, 2, 2);
+        float ELAtime = 0;
+        while (ELAtime < weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2)
+        {
+            ELAtime += Time.deltaTime;
+            Debug.Log(2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
+            sword.transform.localScale = Vector3.Lerp(start, end, 2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
+            yield return null;
+        }
+        
         for (int i = 0; i < info.Length; i++)
         {
             if (info[i].tag == "Enemy")
@@ -285,9 +308,11 @@ public class PlayerScript : MonoBehaviour
                 info[i].GetComponent<EnemyScript>().TakeDamage(weapon.GetComponent<MeleeWeaponScript>().Damage());
             }
         }
-        yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
+        yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2);
         playerRB.freezeRotation = false;
         state = State.Normal;
+        sword.transform.localScale = new Vector3(0, 0, 0);
+        yield return null;
     }
 
     IEnumerator RangedAttackRoutine(GameObject weapon)
@@ -304,6 +329,7 @@ public class PlayerScript : MonoBehaviour
     #region healthFuncs
     public void takeDamage(float damageVal)
     {
+        StartCoroutine(DamageIndicator());
         float adjustedDamage = damageVal * (defenseStat/100);
         currHealth -= adjustedDamage;
         Debug.Log("hurt; current health = " + currHealth);
@@ -319,6 +345,16 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    IEnumerator DamageIndicator()
+    {
+        SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        sprite.color = new Color(192, 44, 44);
+        Debug.Log(sprite.color);
+        //yield return new WaitForSeconds(.3f);
+        //sprite.color = new Color(255, 255, 255);
+        yield return null;
+    }
+
     public void heal(float healVal)
     {
         currHealth = Mathf.Min(maxHealth, currHealth + healVal);
@@ -332,8 +368,9 @@ public class PlayerScript : MonoBehaviour
 
     private void Die()
     {
-        GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
-        //Destroy(this.gameObject);
+        Debug.Log("died");
+        //GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
+        Destroy(this.gameObject);
         Debug.Log("player died");
     }
     #endregion

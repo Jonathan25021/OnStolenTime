@@ -20,7 +20,7 @@ public class CameraScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector3(player.position.x, player.position.y, -10);
     }
-
+    /*
     // Update is called once per frame
     void Update()
     {
@@ -68,4 +68,5 @@ public class CameraScript : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition - new Vector3(0, 0, 10),
             ref currentVelocity, followDuration, maxFollowSpeed);
     }
+    */
 }

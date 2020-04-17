@@ -79,7 +79,6 @@ public class EnemyScript : MonoBehaviour
         {
             state = State.Alert;
         }
-        Debug.Log(state);
     }
     public void TakeDamage(float damage)
     {
