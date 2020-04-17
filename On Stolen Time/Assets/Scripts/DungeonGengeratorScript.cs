@@ -306,7 +306,7 @@ public class DungeonGengeratorScript : MonoBehaviour
                         }
                         if (Random.Range(0,75) == 0)
                         {
-                            Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(i, j, 0f), Quaternion.identity);
+                            Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(i, j, 0f), Quaternion.identity);
                         }
                     }
                     

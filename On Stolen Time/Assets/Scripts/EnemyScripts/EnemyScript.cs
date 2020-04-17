@@ -11,11 +11,14 @@ public class EnemyScript : MonoBehaviour
 
     #region MovemenetVars
     private Vector2 movement;
-    public float baseMoveSpeed = 1;
-    public float ChaseSpeed = 2;
+    public float baseMoveSpeed = 2;
     private Rigidbody2D enemyRB;
     private Vector3 dir;
     private GameObject player;
+    #endregion
+
+    #region AnimationVars
+    Animator anim;
     #endregion
 
     #region AttackVars
@@ -32,6 +35,7 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         enemyRB = GetComponent<Rigidbody2D>();
         currHealth = maxHealth;
         state = State.Idle;
@@ -43,24 +47,40 @@ public class EnemyScript : MonoBehaviour
         switch (state)
         {
             case State.Idle:
+                anim.SetBool("idle", true);
+                anim.SetBool("moving", false);
                 enemyRB.velocity = Vector2.zero;
                 break;
             case State.Alert:
                 chase();
+                anim.SetBool("idle", false);
+                anim.SetBool("moving", true);
                 break;
             case State.Attack:
+                anim.SetBool("idle", false);
+                anim.SetBool("moving", false);
                 attack();
                 break;
         }
     }
     
-    private void chase()
+    public virtual void chase()
     {
         dir = player.transform.position - transform.position;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         movement = dir.normalized;
-        enemyRB.velocity = movement.normalized * ChaseSpeed;
+        enemyRB.velocity = movement.normalized * baseMoveSpeed;
+    }
+
+    public void slow()
+    {
+        baseMoveSpeed = baseMoveSpeed / 2;
+    }
+
+    public void speed()
+    {
+        baseMoveSpeed = baseMoveSpeed * 2;
     }
 
     private void attack()

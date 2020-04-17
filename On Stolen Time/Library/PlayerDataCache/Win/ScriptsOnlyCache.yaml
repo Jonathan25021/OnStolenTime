@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BasicGunScript
     - BasicSwordScript
+    - BatScript
     - CameraScript
     - DungeonGengeratorScript
     - LineOfSightScript
@@ -20,6 +21,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineBehaviourEditor
     - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
@@ -63,31 +65,33 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9674}
+      Script: {instanceID: 9744}
     - Class: 114
-      Script: {instanceID: 9878}
+      Script: {instanceID: 9948}
     - Class: 114
-      Script: {instanceID: 9936}
+      Script: {instanceID: 10006}
     - Class: 114
-      Script: {instanceID: 9990}
+      Script: {instanceID: 10060}
     - Class: 114
-      Script: {instanceID: 10020}
+      Script: {instanceID: 10090}
     - Class: 114
-      Script: {instanceID: 10128}
+      Script: {instanceID: 10198}
     - Class: 114
-      Script: {instanceID: 10288}
+      Script: {instanceID: 10358}
     - Class: 114
-      Script: {instanceID: 10706}
+      Script: {instanceID: 10776}
     - Class: 114
-      Script: {instanceID: 10916}
+      Script: {instanceID: 10986}
     - Class: 114
-      Script: {instanceID: 11150}
+      Script: {instanceID: 11220}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11448}
     - Class: 114
-      Script: {instanceID: 11524}
+      Script: {instanceID: 11594}
     - Class: 114
-      Script: {instanceID: 11558}
+      Script: {instanceID: 11628}
+    - Class: 114
+      Script: {instanceID: 11772}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -207,7 +211,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 75f8c6c745dc38d485f7555014149b29
+      Hash: b9f56a99bb18d3602715ea723b3a9944
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SmallMummyScript
@@ -447,7 +451,7 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 7336070bed9cd44ad022e81be1fade38
+      Hash: e1db9080040093fe20b5bfa6b233ee96
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerScript
@@ -459,7 +463,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: 85e2c2973975368a960397fa074b7e11
+      Hash: 2cecd7bcf9d7df391f19128803c05cc8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChestOpen
@@ -471,7 +475,7 @@ ScriptsOnlyBuild:
     className: CountdownUI
   - hash:
       serializedVersion: 2
-      Hash: 167507cc517e86710b484fa2e614d30f
+      Hash: 3e4ea99c367de63b6c2982c6e6217522
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyScript
@@ -613,6 +617,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: b9f56a99bb18d3602715ea723b3a9944
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BatScript
   platform: 5
   scenePathNames:
   - Assets/Scenes/DugneonTest.unity

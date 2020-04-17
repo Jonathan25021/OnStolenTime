@@ -48,6 +48,24 @@ public class PlayerScript : MonoBehaviour
     private GameObject sword;
     #endregion
 
+    #region time
+    // countdown
+    public int rate = 1;
+    private Vector2 rewindedPos;
+    private float lastUsed = 0;
+    private bool toGo = false;
+    private float cost = 0;
+    private float rewindedHealth;
+    private bool slow = false;
+    private GameObject rewindedFirstWeapon;
+    private GameObject rewindedSecondWeapon;
+    #endregion
+
+
+    #region Enemies
+    private GameObject[] allEnemies;
+    #endregion
+
     #region UI
     public Slider HealthBar;
     public Slider StaminaBar;
@@ -60,12 +78,13 @@ public class PlayerScript : MonoBehaviour
     }
 
     #region animation_components
-    public Animator anim;
+    Animator anim;
     #endregion
 
     #region UnityFuncs
     void Start()
     {
+        anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
         currHealth = maxHealth;
@@ -78,6 +97,8 @@ public class PlayerScript : MonoBehaviour
         rollCooldown = 0;
         sword = this.transform.GetChild(0).gameObject;
         sword.transform.localScale = new Vector3(0, 0, 2);
+        rewindedPos = transform.position;
+        allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
@@ -90,6 +111,7 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
+                
                 break;
             case State.Roll:
                 roll();
@@ -99,6 +121,8 @@ public class PlayerScript : MonoBehaviour
                 break;
         }
         countDown();
+        rewind();
+        toggleSpeed();
         if (currHealth <= 0)
         {
             Die();
@@ -110,10 +134,77 @@ public class PlayerScript : MonoBehaviour
     #region timeFuncs
     private void countDown()
     {
-        currTimer -= Time.deltaTime;
         if (currTimer < 0)
         {
             Die();
+        }
+        currTimer -= rate * Time.deltaTime;
+        lastUsed -= Time.deltaTime;
+    }
+
+    private void toggleSpeed()
+    {
+        if (Input.GetKey(KeyCode.T) && !slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().slow();
+            }
+            slow = true;
+            rate = 2;
+        } else if (Input.GetKey(KeyCode.T) && slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().speed();
+            }
+            slow = false;
+            rate = 1;
+        }
+        if (Input.GetKey(KeyCode.G) && !slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().slow();
+            }
+            baseMoveSpeed = 2;
+            slow = true;
+            rate = 2;
+        } else if (Input.GetKey(KeyCode.G) && slow)
+        {
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().speed();
+            }
+            baseMoveSpeed = 3;
+            slow = false;
+            rate = 1;
+        }
+    }
+
+    private void rewind()
+    {
+        if (Input.GetKey(KeyCode.X))
+        {
+            Debug.Log("Oh that's hot!");
+            rewindedPos = transform.position;
+            rewindedHealth = currHealth;
+            toGo = true;
+            cost = currTimer;
+            rewindedFirstWeapon = primaryWeapon;
+            rewindedSecondWeapon = secondaryWeapon;
+        } else if (Input.GetKey(KeyCode.Z) && currTimer > 10 && lastUsed <= 0 && toGo)
+        {
+            Debug.Log("It's rewind time!");
+            Debug.Log(rewindedPos);
+            Debug.Log(transform.position);
+            transform.position = rewindedPos;
+            currTimer -= 2 * (cost - currTimer);
+            currHealth = rewindedHealth;
+            HealthBar.value = healthRatio();
+            primaryWeapon = rewindedFirstWeapon;
+            secondaryWeapon = rewindedSecondWeapon;
+            lastUsed = 2;
         }
     }
     #endregion
@@ -215,7 +306,6 @@ public class PlayerScript : MonoBehaviour
             staminaRegenTimer = 0f;
             currStamina -= rollStaminaCost;
             currSlideSpeed = slideSpeed;
-            //Debug.Log(currSlideSpeed);
             rollCooldown = rollCooldownMax;
             state = State.Roll;
         }
@@ -232,7 +322,6 @@ public class PlayerScript : MonoBehaviour
         Debug.Log(currSlideSpeed);
         if (currSlideSpeed < 1f)
         {
-            //Debug.Log(currSlideSpeed);
             Debug.Log("Player stopped rolling");
             state = State.Normal;
         }
@@ -259,7 +348,7 @@ public class PlayerScript : MonoBehaviour
         {
             state = State.Attack;
             currWeapon = 1;
-            //anim.SetTrigger("leftAttack");
+            anim.SetTrigger("leftAttack");
             attackWith(secondaryWeapon);
         }
 
@@ -290,8 +379,8 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Cast hitbox now");
         playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
-        Vector3 start = new Vector3(2, 0, 2);
-        Vector3 end = new Vector3(2, 2, 2);
+        Vector3 start = new Vector3(1, 0, 1);
+        Vector3 end = new Vector3(1, 2, 1);
         float ELAtime = 0;
         while (ELAtime < weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2)
         {

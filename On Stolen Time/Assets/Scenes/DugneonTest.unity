@@ -137,7 +137,7 @@ PrefabInstance:
         type: 3}
       propertyPath: secondaryWeapon
       value: 
-      objectReference: {fileID: 7129834263746905214, guid: 47fa1486f60fc224d93ca4563f4a58c3,
+      objectReference: {fileID: 9037773003388585478, guid: 1b6e65c0ad341f94780befe1b696a10d,
         type: 3}
     - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
@@ -169,6 +169,11 @@ PrefabInstance:
       propertyPath: sprintMoveSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2220058022451399707, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5cb83ba2ab020584cb6b8a8d209e4850, type: 2}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -457,7 +462,7 @@ Transform:
   m_GameObject: {fileID: 574091638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.43, y: -0.68, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1668409277}
   m_RootOrder: 0
@@ -500,12 +505,12 @@ SpriteRenderer:
   m_SortingLayerID: -135041331
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c193297487e2a6b45b534a4bcea0ab8e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6b2f7e90a151e4d9692c732f6648c891, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 4, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -898,7 +903,7 @@ PrefabInstance:
     - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
       propertyPath: enemies.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
@@ -993,6 +998,12 @@ PrefabInstance:
       propertyPath: enemies.Array.data[0]
       value: 
       objectReference: {fileID: 6561833630054420367, guid: 830a890f339715540bb50e91ef06391c,
+        type: 3}
+    - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
+        type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 6561833630054420367, guid: 94a0bb8a510c6b64fafaaefab753e3cc,
         type: 3}
     - target: {fileID: 3802248807039916517, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
