@@ -118,6 +118,7 @@ public class PlayerScript : MonoBehaviour
                 break;
             case State.Attack:
                 movementMaster();
+                rollCheck();
                 break;
         }
         countDown();
@@ -340,14 +341,12 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             state = State.Attack;
-            currWeapon = 0;
             anim.SetTrigger("leftAttack");
             attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
         {
             state = State.Attack;
-            currWeapon = 1;
             anim.SetTrigger("leftAttack");
             attackWith(secondaryWeapon);
         }
@@ -364,8 +363,11 @@ public class PlayerScript : MonoBehaviour
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
         {
             Debug.Log("beggining ranged attack");
-            
-            StartCoroutine(RangedAttackRoutine(weapon));
+
+            state = State.Attack;
+            rangeAttack = true;
+            StartCoroutine(weapon.GetComponent<RangedWeaponScript>().Fire(transform.position, dir));
+            state = State.Normal;
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 2)
         {
@@ -406,12 +408,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator RangedAttackRoutine(GameObject weapon)
     {
-        state = State.Attack;
-        rangeAttack = true;
-        panRange = weapon.GetComponent<RangedWeaponScript>().RangeFactor();
-        yield return null;
-        //yield return new WaitForSeconds(weapon.GetComponent<RangedWeaponScript>().AttackSpeed());
-        state = State.Normal;
+        yield return new WaitForSeconds(weapon.GetComponent<RangedWeaponScript>().AttackSpeed());
     }
     #endregion
 

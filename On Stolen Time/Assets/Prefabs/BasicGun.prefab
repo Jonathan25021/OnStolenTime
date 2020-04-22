@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7129834263746905200}
   - component: {fileID: 7129834263746905215}
   - component: {fileID: -6629275155786993746}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BasicGun
   m_TagString: Pickup
   m_Icon: {fileID: 0}

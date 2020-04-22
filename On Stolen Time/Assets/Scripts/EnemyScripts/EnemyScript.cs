@@ -47,18 +47,18 @@ public class EnemyScript : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                anim.SetBool("idle", true);
-                anim.SetBool("moving", false);
+                //anim.SetBool("idle", true);
+                //anim.SetBool("moving", false);
                 enemyRB.velocity = Vector2.zero;
                 break;
             case State.Alert:
                 chase();
-                anim.SetBool("idle", false);
-                anim.SetBool("moving", true);
+                //anim.SetBool("idle", false);
+                //anim.SetBool("moving", true);
                 break;
             case State.Attack:
-                anim.SetBool("idle", false);
-                anim.SetBool("moving", false);
+                //anim.SetBool("idle", false);
+                //anim.SetBool("moving", false);
                 attack();
                 break;
         }
@@ -102,6 +102,8 @@ public class EnemyScript : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        Debug.Log(currHealth);
+        enemyRB.velocity = -enemyRB.velocity;
         currHealth -= damage;
         Debug.Log(currHealth);
         if (currHealth <= 0)

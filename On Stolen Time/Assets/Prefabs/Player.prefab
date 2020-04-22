@@ -143,17 +143,15 @@ MonoBehaviour:
   staminaTimeToRegen: 3
   rollStaminaCost: 40
   slideSpeed: 7
+  rollCooldownMax: 0.5
   startTimer: 600
   attackStat: 0
   defenseStat: 0
   primaryWeapon: {fileID: 0}
   secondaryWeapon: {fileID: 0}
-  Weapons: []
-  currWeapon: {fileID: 0}
-  currWeaponIndex: 0
+  rate: 1
   HealthBar: {fileID: 0}
   StaminaBar: {fileID: 0}
-  anim: {fileID: 2220058022451399707}
 --- !u!95 &2220058022451399707
 Animator:
   serializedVersion: 3
@@ -164,7 +162,7 @@ Animator:
   m_GameObject: {fileID: 4613374257381417753}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 40d2f2ddd5b14c248ba0e452e428739d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5cb83ba2ab020584cb6b8a8d209e4850, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedWeaponScript : WeaponScript
+public abstract class RangedWeaponScript : WeaponScript
 {
     public int _ammo;
     public float _rangeFactor;
@@ -20,7 +20,7 @@ public class RangedWeaponScript : WeaponScript
     {
         
     }
-
+    
     public void Reload()
     {
         if (_ammo < _currMag)
@@ -44,6 +44,8 @@ public class RangedWeaponScript : WeaponScript
     {
         return _rangeFactor;
     }
+
+    abstract public IEnumerator Fire(Vector3 position, Vector3 dir);
 
     override public int WeaponType()
     {
