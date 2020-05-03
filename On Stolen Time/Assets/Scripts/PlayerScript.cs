@@ -35,6 +35,9 @@ public class PlayerScript : MonoBehaviour
     // countdown
     public int startTimer = 600;
     private GameObject mainCamera;
+
+    private float timeInRangeAttack;
+    private int mouseButton;
     #endregion
 
     #region combatVars
@@ -46,6 +49,10 @@ public class PlayerScript : MonoBehaviour
     private bool rangeAttack;
     private float panRange;
     private GameObject sword;
+    public GameObject helmet;
+    public GameObject chestplate;
+    public GameObject leggings;
+    public GameObject boots;
     #endregion
 
     #region time
@@ -74,7 +81,7 @@ public class PlayerScript : MonoBehaviour
     private State state;
     private enum State
     {
-        Normal, Roll, Attack
+        Normal, Roll, Attack, Aim, Fire
     }
 
     #region animation_components
@@ -84,6 +91,10 @@ public class PlayerScript : MonoBehaviour
     #region UnityFuncs
     void Start()
     {
+        primaryWeapon = Instantiate(primaryWeapon) as GameObject;
+        secondaryWeapon = Instantiate(secondaryWeapon) as GameObject;
+        primaryWeapon.transform.parent = this.transform;
+        secondaryWeapon.transform.parent = this.transform;
         anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
@@ -111,13 +122,23 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
-                
                 break;
             case State.Roll:
                 roll();
                 break;
             case State.Attack:
                 movementMaster();
+                rollCheck();
+                break;
+            case State.Aim:
+                movementMaster();
+                lookAtMouse();
+                rollCheck();
+                RangeAttackCheck();
+                break;
+            case State.Fire:
+                movementMaster();
+                lookAtMouse();
                 rollCheck();
                 break;
         }
@@ -271,7 +292,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            pan(100000);
+            pan();
         }
         else
         {
@@ -280,17 +301,10 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
-
-    private void panCheck()
+    
+    private void pan()
     {
-        if (rangeAttack)
-        {
-            pan(panRange);
-        }
-    }
-    private void pan(float panFactor)
-    {
-            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10) + dir / panFactor * Screen.width, .125f);
+            Vector3 panPosition = Vector3.Lerp(mainCamera.transform.position, transform.position + new Vector3(0, 0, -10) + dir.normalized*4, .125f);
             mainCamera.transform.position = panPosition;
     }
 
@@ -314,7 +328,6 @@ public class PlayerScript : MonoBehaviour
 
     private void roll()
     {
-
         var angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg + 90;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         playerRB.freezeRotation = true;
@@ -323,7 +336,6 @@ public class PlayerScript : MonoBehaviour
         Debug.Log(currSlideSpeed);
         if (currSlideSpeed < 1f)
         {
-            Debug.Log("Player stopped rolling");
             state = State.Normal;
         }
         playerRB.freezeRotation = false;
@@ -340,14 +352,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            mouseButton = 0;
             state = State.Attack;
-            anim.SetTrigger("leftAttack");
             attackWith(primaryWeapon);
         }
         else if (Input.GetMouseButton(1))
         {
+            mouseButton = 1;
             state = State.Attack;
-            anim.SetTrigger("leftAttack");
             attackWith(secondaryWeapon);
         }
 
@@ -357,17 +369,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (weapon.GetComponent<WeaponScript>().WeaponType() == 0)
         {
-            
+
+            anim.SetTrigger("leftAttack");
             StartCoroutine(MeleeAttackRoutine(weapon));
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 1)
         {
-            Debug.Log("beggining ranged attack");
-
-            state = State.Attack;
-            rangeAttack = true;
-            StartCoroutine(weapon.GetComponent<RangedWeaponScript>().Fire(transform.position, dir));
-            state = State.Normal;
+            state = State.Aim;
+            timeInRangeAttack = 0;
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 2)
         {
@@ -378,7 +387,6 @@ public class PlayerScript : MonoBehaviour
     IEnumerator MeleeAttackRoutine(GameObject weapon)
     {
         state = State.Attack;
-        Debug.Log("Cast hitbox now");
         playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
         Vector3 start = new Vector3(1, 0, 1);
@@ -387,11 +395,10 @@ public class PlayerScript : MonoBehaviour
         while (ELAtime < weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2)
         {
             ELAtime += Time.deltaTime;
-            Debug.Log(2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
             sword.transform.localScale = Vector3.Lerp(start, end, 2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
             yield return null;
         }
-        
+        Debug.Log("finish attack");
         for (int i = 0; i < info.Length; i++)
         {
             if (info[i].tag == "Enemy")
@@ -399,17 +406,47 @@ public class PlayerScript : MonoBehaviour
                 info[i].GetComponent<EnemyScript>().TakeDamage(weapon.GetComponent<MeleeWeaponScript>().Damage());
             }
         }
-        yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2);
         playerRB.freezeRotation = false;
         state = State.Normal;
         sword.transform.localScale = new Vector3(0, 0, 0);
-        yield return null;
+        Debug.Log("finish attack");
+        yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2);
+    }
+
+    private void RangeAttackCheck()
+    {
+        if (Input.GetMouseButtonUp(mouseButton))
+        {
+            Debug.Log("Fire");
+            if (mouseButton == 0)
+            {
+                StartCoroutine(RangedAttackRoutine(primaryWeapon));
+            }
+            else
+            {
+                StartCoroutine(RangedAttackRoutine(secondaryWeapon));
+            }
+            
+            
+        }
+        if (timeInRangeAttack < 1f)
+        {
+            timeInRangeAttack += Time.deltaTime;
+        }
+        else
+        {
+            pan();
+        }
     }
 
     IEnumerator RangedAttackRoutine(GameObject weapon)
     {
-        yield return new WaitForSeconds(weapon.GetComponent<RangedWeaponScript>().AttackSpeed());
+        anim.SetTrigger("leftAttack");
+        state = State.Fire;
+        yield return StartCoroutine(weapon.GetComponent<RangedWeaponScript>().Fire(transform.position, dir));
+        state = State.Normal;
     }
+
     #endregion
 
     #region healthFuncs
@@ -423,7 +460,7 @@ public class PlayerScript : MonoBehaviour
         {
             return;
         }
-        currHealth -= damageVal;
+        currHealth -= Mathf.Max(0,(damageVal - totalFlatDamageModifier()) * (1 - totalPercentDamageModifier()));
         HealthBar.value = healthRatio();
         if (currHealth <= 0)
         {
@@ -431,6 +468,21 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private float totalPercentDamageModifier()
+    {
+        return helmet.GetComponent<ArmorScript>().percentDamageModifier
+            + chestplate.GetComponent<ArmorScript>().percentDamageModifier
+            + leggings.GetComponent<ArmorScript>().percentDamageModifier
+            + boots.GetComponent<ArmorScript>().percentDamageModifier;
+    }
+
+    private float totalFlatDamageModifier()
+    {
+        return helmet.GetComponent<ArmorScript>().flatDamageModifier
+            + chestplate.GetComponent<ArmorScript>().flatDamageModifier
+            + leggings.GetComponent<ArmorScript>().flatDamageModifier
+            + boots.GetComponent<ArmorScript>().flatDamageModifier;
+    }
     IEnumerator DamageIndicator()
     {
         SpriteRenderer sprite = this.gameObject.GetComponent<SpriteRenderer>();
