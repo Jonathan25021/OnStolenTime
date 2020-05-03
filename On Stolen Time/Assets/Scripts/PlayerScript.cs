@@ -394,7 +394,7 @@ public class PlayerScript : MonoBehaviour
     {
         state = State.Attack;
         playerRB.freezeRotation = true;
-        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, 0.5f);
+        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up * .8f, 0.5f);
         Vector3 start = new Vector3(1, 0, 1);
         Vector3 end = new Vector3(1, 2, 1);
         float ELAtime = 0;
