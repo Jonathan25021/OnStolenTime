@@ -22,7 +22,10 @@ public class EnemyScript : MonoBehaviour
     #endregion
 
     #region AttackVars
-    private int damage = 10;
+    public float Damage = 10;
+    public float AttackSpeed = .75f;
+    public float AttackRadius = .3f;
+    private bool isAttacking = false;
     #endregion
 
     private State state;
@@ -53,13 +56,16 @@ public class EnemyScript : MonoBehaviour
                 break;
             case State.Alert:
                 chase();
+                if (Vector2.Distance(transform.position, player.transform.position) < 1 && !isAttacking)
+                {
+                    StartCoroutine(attack());
+                }
                 anim.SetBool("idle", false);
                 anim.SetBool("moving", true);
                 break;
             case State.Attack:
                 anim.SetBool("idle", false);
-                anim.SetBool("moving", false);
-                attack();
+                anim.SetBool("moving", true);
                 break;
         }
     }
@@ -83,15 +89,26 @@ public class EnemyScript : MonoBehaviour
         baseMoveSpeed = baseMoveSpeed * 4;
     }
 
-    private void attack()
+    private IEnumerator attack()
     {
-        player.GetComponent<PlayerScript>().takeDamage(damage);
+        isAttacking = true;
+        Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, AttackRadius);
+        for (int i = 0; i < info.Length; i++)
+        {
+            if (info[i].tag == "Player")
+            {
+                info[i].GetComponent<PlayerScript>().takeDamage(Damage);
+            }
+        }
+        Debug.Log(Time.time);
+        yield return new WaitForSeconds(AttackSpeed);
+        isAttacking = false;
+        yield return null;
     }
 
     public void SetTarget(GameObject obj)
     {
         player = obj;
-        Debug.Log(player);
         if (obj == null)
         {
             state = State.Idle;

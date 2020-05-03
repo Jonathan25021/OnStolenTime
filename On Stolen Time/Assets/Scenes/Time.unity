@@ -127,6 +127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1213638809}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -269,6 +274,7 @@ GameObject:
   - component: {fileID: 1213638812}
   - component: {fileID: 1213638811}
   - component: {fileID: 1213638810}
+  - component: {fileID: 1213638813}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -341,6 +347,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1213638813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213638809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d6f3a36a7b4d445bcfe7a178a94900, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewportFactor: 0
+  followDuration: 0
+  maxFollowSpeed: 0
 --- !u!1001 &1282481608
 PrefabInstance:
   m_ObjectHideFlags: 0
