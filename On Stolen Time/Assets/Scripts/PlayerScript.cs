@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     private float rollCooldown;
     // countdown
     public int startTimer = 600;
-    private GameObject mainCamera;
+    public GameObject mainCamera;
 
     private float timeInRangeAttack;
     private int mouseButton;
