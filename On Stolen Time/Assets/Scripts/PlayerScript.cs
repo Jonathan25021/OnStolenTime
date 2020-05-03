@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     private float rollCooldown;
     // countdown
     public int startTimer = 600;
-    private GameObject mainCamera;
+    public GameObject mainCamera;
 
     private float timeInRangeAttack;
     private int mouseButton;
@@ -413,10 +413,10 @@ public class PlayerScript : MonoBehaviour
             }
         }
         playerRB.freezeRotation = false;
-        state = State.Normal;
         sword.transform.localScale = new Vector3(0, 0, 0);
         Debug.Log("finish attack");
         yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2);
+        state = State.Normal;
     }
 
     private void RangeAttackCheck()
