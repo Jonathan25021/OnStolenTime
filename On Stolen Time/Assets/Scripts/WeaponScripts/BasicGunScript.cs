@@ -20,17 +20,26 @@ public class BasicGunScript : RangedWeaponScript
 
     public override IEnumerator Fire(Vector3 position, Vector3 dir)
     {
-        if(CurrMag() == 0)
+        Debug.Log(_currMag);
+        if (_currMag <= 0)
         {
-            Reload();
+
+            yield return StartCoroutine(Reload());
         }
-        Debug.DrawRay(position, dir, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(position, dir);
-        if (hit && hit.transform.CompareTag("Enemy"))
+        else
         {
-            hit.transform.GetComponent<EnemyScript>().TakeDamage(_damage);
+            RaycastHit2D hit = Physics2D.Raycast(position, dir);
+            if (hit && hit.transform.CompareTag("Enemy"))
+            {
+                hit.transform.GetComponent<EnemyScript>().TakeDamage(_damage);
+            
+            }
+            _currMag--;
+            Debug.Log(Time.time);
+            yield return new WaitForSeconds(_attackSpeed);
+
         }
-        yield return new WaitForSeconds(_attackSpeed);
+            
     }
 
 }

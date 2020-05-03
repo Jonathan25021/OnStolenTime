@@ -51,7 +51,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.6
+  m_Radius: 0.2
 --- !u!50 &6561833630054420362
 Rigidbody2D:
   serializedVersion: 4
@@ -155,7 +155,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 50
   baseMoveSpeed: 3
-  ChaseSpeed: 1
   attackDamage: 5
 --- !u!1001 &4615673317998323412
 PrefabInstance:

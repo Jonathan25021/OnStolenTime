@@ -21,18 +21,25 @@ public abstract class RangedWeaponScript : WeaponScript
         
     }
     
-    public void Reload()
+    public IEnumerator Reload()
     {
-        if (_ammo < _currMag)
+        if (_ammo <= 0)
+        {
+            yield return null;
+        }
+        else if (_ammo < _currMag)
         {
             _currMag = _ammo;
             _ammo = 0;
+            yield return new WaitForSeconds(reloadTime);
         }
         else
         {
             _ammo -= (_magSize - _currMag);
             _currMag = _magSize;
+            yield return new WaitForSeconds(reloadTime);
         }
+        Debug.Log("reloading");
     }
 
     public int CurrMag()
