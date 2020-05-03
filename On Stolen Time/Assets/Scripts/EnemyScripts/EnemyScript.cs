@@ -75,12 +75,12 @@ public class EnemyScript : MonoBehaviour
 
     public void slow()
     {
-        baseMoveSpeed = baseMoveSpeed / 2;
+        baseMoveSpeed = baseMoveSpeed / 4;
     }
 
     public void speed()
     {
-        baseMoveSpeed = baseMoveSpeed * 2;
+        baseMoveSpeed = baseMoveSpeed * 4;
     }
 
     private void attack()

@@ -106,14 +106,18 @@ public class PlayerScript : MonoBehaviour
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         rollCooldown = 0;
-        sword = this.transform.GetChild(0).gameObject;
+        sword = transform.GetChild(0).gameObject;
         sword.transform.localScale = new Vector3(0, 0, 2);
         rewindedPos = transform.position;
-        allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
     }
 
     void Update()
     {
+        if (allEnemies == null)
+        {
+            allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+            Debug.Log(allEnemies.Length);
+        }
         moveMainCamera();
         switch (state)
         {
@@ -166,41 +170,43 @@ public class PlayerScript : MonoBehaviour
 
     private void toggleSpeed()
     {
-        if (Input.GetKey(KeyCode.T) && !slow)
+        if (Input.GetKeyDown(KeyCode.T) && !slow)
         {
+            slow = true;
+            rate = 4;
             foreach (GameObject enemy in allEnemies)
             {
+                Debug.Log("ENEMIES BEGONE");
                 enemy.GetComponent<EnemyScript>().slow();
             }
-            slow = true;
-            rate = 2;
-        } else if (Input.GetKey(KeyCode.T) && slow)
+        } else if (Input.GetKeyDown(KeyCode.T) && slow)
         {
+            Debug.Log("BYE");
+            slow = false;
+            rate = 1;
             foreach (GameObject enemy in allEnemies)
             {
                 enemy.GetComponent<EnemyScript>().speed();
             }
-            slow = false;
-            rate = 1;
         }
-        if (Input.GetKey(KeyCode.G) && !slow)
+        if (Input.GetKeyDown(KeyCode.G) && !slow)
         {
-            foreach (GameObject enemy in allEnemies)
-            {
-                enemy.GetComponent<EnemyScript>().slow();
-            }
             baseMoveSpeed = 2;
             slow = true;
             rate = 2;
-        } else if (Input.GetKey(KeyCode.G) && slow)
+            foreach (GameObject enemy in allEnemies)
+            {
+                enemy.GetComponent<EnemyScript>().slow();
+            }
+        } else if (Input.GetKeyDown(KeyCode.G) && slow)
         {
+            baseMoveSpeed = 3;
+            slow = false;
+            rate = 1;
             foreach (GameObject enemy in allEnemies)
             {
                 enemy.GetComponent<EnemyScript>().speed();
             }
-            baseMoveSpeed = 3;
-            slow = false;
-            rate = 1;
         }
     }
 
