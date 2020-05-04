@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LineOfSightProjectileAnubis : MonoBehaviour
+public class LineOfSightAnubisProjectile : MonoBehaviour
 {
     public float attackDamage = 5;
     public Transform ProjectileLocation; //from where the projectile will get released
