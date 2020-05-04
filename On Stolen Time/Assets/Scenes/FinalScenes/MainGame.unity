@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
 --- !u!1001 &350709856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47fa1486f60fc224d93ca4563f4a58c3, type: 3}
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
 --- !u!1 &355637311
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +363,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355637311}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> cad19d68fbeed0725b807f6b6a3faad8b672431f
+>>>>>>> 0e19a61a1cba8af69a16299e66b0d8b1defaa0e3:On Stolen Time/Assets/Scenes/DugneonTest.unity
 --- !u!1 &514105133
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +689,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_RootOrder: 4
+=======
+<<<<<<< HEAD
+  m_RootOrder: 5
+=======
+  m_RootOrder: 9
+>>>>>>> cad19d68fbeed0725b807f6b6a3faad8b672431f
+>>>>>>> 0e19a61a1cba8af69a16299e66b0d8b1defaa0e3:On Stolen Time/Assets/Scenes/DugneonTest.unity
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1802786069 stripped
 MonoBehaviour:
@@ -1019,8 +1033,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_SourcePrefab: {fileID: 100100000, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43, type: 3}
 --- !u!1001 &9037773004594200187
+=======
+<<<<<<< HEAD
+  m_SourcePrefab: {fileID: 100100000, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
+--- !u!1001 &782847220
+>>>>>>> 0e19a61a1cba8af69a16299e66b0d8b1defaa0e3:On Stolen Time/Assets/Scenes/DugneonTest.unity
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1093,4 +1115,9 @@ PrefabInstance:
       value: BasicSword
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_SourcePrefab: {fileID: 100100000, guid: 1b6e65c0ad341f94780befe1b696a10d, type: 3}
+=======
+  m_SourcePrefab: {fileID: 100100000, guid: 546753aefb83e6d4c9629ca47cd0166c, type: 3}
+>>>>>>> cad19d68fbeed0725b807f6b6a3faad8b672431f
+>>>>>>> 0e19a61a1cba8af69a16299e66b0d8b1defaa0e3:On Stolen Time/Assets/Scenes/DugneonTest.unity
