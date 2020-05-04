@@ -52,8 +52,6 @@ public class EnemyScript : MonoBehaviour
             case State.Idle:
                 anim.SetBool("idle", true);
                 anim.SetBool("moving", false);
-                anim.SetBool("attacking", false);
-
                 enemyRB.velocity = Vector2.zero;
                 break;
             case State.Alert:
@@ -64,13 +62,10 @@ public class EnemyScript : MonoBehaviour
                 }
                 anim.SetBool("idle", false);
                 anim.SetBool("moving", true);
-                anim.SetBool("attacking", false);
-
                 break;
             case State.Attack:
                 anim.SetBool("idle", false);
                 anim.SetBool("moving", true);
-                anim.SetBool("attacking", true);
                 break;
         }
     }
@@ -84,19 +79,20 @@ public class EnemyScript : MonoBehaviour
         enemyRB.velocity = movement.normalized * baseMoveSpeed;
     }
 
-    public void Slow()
+    public void slow()
     {
-        baseMoveSpeed /= 4;
+        baseMoveSpeed = baseMoveSpeed / 4;
     }
 
-    public void Speed()
+    public void speed()
     {
-        baseMoveSpeed *= 4;
+        baseMoveSpeed = baseMoveSpeed * 4;
     }
 
     private IEnumerator attack()
     {
         isAttacking = true;
+        yield return new WaitForSeconds(AttackSpeed / 2);
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, AttackRadius);
         for (int i = 0; i < info.Length; i++)
         {
@@ -106,7 +102,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
         Debug.Log(Time.time);
-        yield return new WaitForSeconds(AttackSpeed);
+        yield return new WaitForSeconds(AttackSpeed / 2);
         isAttacking = false;
         yield return null;
     }
@@ -136,6 +132,6 @@ public class EnemyScript : MonoBehaviour
 
     private void die()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }
