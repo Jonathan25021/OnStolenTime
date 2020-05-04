@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &8707427399424603515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586271857486589366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ceded7eadeb3842af9702ea729856c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 40
+  ProjectileLocation: {fileID: 0}
+  hairball: {fileID: 4015687713251992726, guid: 821290b1ee1151345bd99fc5e779c539,
+    type: 3}
+  timeToReload: 2
+  fireSpeed: 10
 --- !u!1 &6561833630054420367
 GameObject:
   m_ObjectHideFlags: 0
