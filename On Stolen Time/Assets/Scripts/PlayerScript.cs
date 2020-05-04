@@ -61,6 +61,12 @@ public class PlayerScript : MonoBehaviour
     private GameObject rewindedSecondWeapon;
     #endregion
 
+    #region pickups
+    private bool touching;
+    private GameObject pick;
+    private Transform pickLoc;
+    private bool first;
+    #endregion
 
     #region Enemies
     private GameObject[] allEnemies;
@@ -96,8 +102,10 @@ public class PlayerScript : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         rollCooldown = 0;
         sword = transform.GetChild(0).gameObject;
-        sword.transform.localScale = new Vector3(0, 0, 2);
+        sword.transform.position = new Vector3(0, 0, 1000000000);
         rewindedPos = transform.position;
+        first = true;
+        touching = false;
     }
 
     void Update()
@@ -128,6 +136,7 @@ public class PlayerScript : MonoBehaviour
         countDown();
         rewind();
         toggleSpeed();
+        pickItem();
         if (currHealth <= 0)
         {
             Die();
@@ -156,7 +165,7 @@ public class PlayerScript : MonoBehaviour
             foreach (GameObject enemy in allEnemies)
             {
                 Debug.Log("ENEMIES BEGONE");
-                enemy.GetComponent<EnemyScript>().slow();
+                enemy.GetComponent<EnemyScript>().Slow();
             }
         } else if (Input.GetKeyDown(KeyCode.T) && slow)
         {
@@ -165,28 +174,28 @@ public class PlayerScript : MonoBehaviour
             rate = 1;
             foreach (GameObject enemy in allEnemies)
             {
-                enemy.GetComponent<EnemyScript>().speed();
+                enemy.GetComponent<EnemyScript>().Speed();
             }
         }
-        if (Input.GetKeyDown(KeyCode.G) && !slow)
-        {
-            baseMoveSpeed = 2;
-            slow = true;
-            rate = 2;
-            foreach (GameObject enemy in allEnemies)
-            {
-                enemy.GetComponent<EnemyScript>().slow();
-            }
-        } else if (Input.GetKeyDown(KeyCode.G) && slow)
-        {
-            baseMoveSpeed = 3;
-            slow = false;
-            rate = 1;
-            foreach (GameObject enemy in allEnemies)
-            {
-                enemy.GetComponent<EnemyScript>().speed();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.G) && !slow)
+        //{
+        //    baseMoveSpeed = 2;
+        //    slow = true;
+        //    rate = 2;
+        //    foreach (GameObject enemy in allEnemies)
+        //    {
+        //        enemy.GetComponent<EnemyScript>().Slow();
+        //    }
+        //} else if (Input.GetKeyDown(KeyCode.G) && slow)
+        //{
+        //    baseMoveSpeed = 3;
+        //    slow = false;
+        //    rate = 1;
+        //    foreach (GameObject enemy in allEnemies)
+        //    {
+        //        enemy.GetComponent<EnemyScript>().Speed();
+        //    }
+        //}
     }
 
     private void rewind()
@@ -462,8 +471,59 @@ public class PlayerScript : MonoBehaviour
     {
         Debug.Log("died");
         //GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         Debug.Log("player died");
+    }
+
+    #endregion
+
+    #region pickup
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pickup") && !touching)
+        {
+            Debug.Log("TOUCH");
+            touching = true;
+            pick = collision.gameObject;
+            pickLoc = collision.transform;
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Pickup") && touching)
+        {
+            Debug.Log("NO!");
+            touching = false;
+            pick = null;
+            pickLoc = null;
+        }
+    }
+
+    private void pickItem()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && touching)
+        {
+            touching = false;
+            if (first)
+            {
+                Debug.Log("HI");
+                Vector3 pos = pickLoc.position;
+                Quaternion rot = pickLoc.rotation;
+                Instantiate(primaryWeapon, pos, rot);
+                first = false;
+            } else
+            {
+                Transform old = primaryWeapon.transform;
+                old.position = new Vector3(pickLoc.transform.position.x, pickLoc.transform.position.y, pickLoc.transform.position.z);
+            }
+            primaryWeapon = pick;
+            Transform newT = pick.transform;
+            newT.position = new Vector3(0, 0, 1000000000);
+            pick = null;
+            pickLoc = null;
+            Debug.Log("picked");
+        }
     }
     #endregion
 }

@@ -73,14 +73,14 @@ public class EnemyScript : MonoBehaviour
         enemyRB.velocity = movement.normalized * baseMoveSpeed;
     }
 
-    public void slow()
+    public void Slow()
     {
-        baseMoveSpeed = baseMoveSpeed / 4;
+        baseMoveSpeed /= 4;
     }
 
-    public void speed()
+    public void Speed()
     {
-        baseMoveSpeed = baseMoveSpeed * 4;
+        baseMoveSpeed *= 4;
     }
 
     private void attack()
@@ -114,6 +114,6 @@ public class EnemyScript : MonoBehaviour
 
     private void die()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

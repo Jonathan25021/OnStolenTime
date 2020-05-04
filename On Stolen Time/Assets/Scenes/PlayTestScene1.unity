@@ -438,6 +438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d6f3a36a7b4d445bcfe7a178a94900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewportFactor: 0
+  followDuration: 0
+  maxFollowSpeed: 0
 --- !u!114 &1357437479 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1296504617942746371, guid: 546753aefb83e6d4c9629ca47cd0166c,
@@ -506,7 +509,7 @@ PrefabInstance:
     - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: startTimer
-      value: 600
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
