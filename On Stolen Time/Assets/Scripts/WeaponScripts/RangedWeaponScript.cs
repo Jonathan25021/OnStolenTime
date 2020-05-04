@@ -47,11 +47,6 @@ public abstract class RangedWeaponScript : WeaponScript
         return _currMag;
     }
 
-    public int Ammo()
-    {
-        return _ammo;
-    }
-
     public float RangeFactor()
     {
         return _rangeFactor;
