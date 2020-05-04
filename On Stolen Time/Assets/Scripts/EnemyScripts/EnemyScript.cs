@@ -97,7 +97,6 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator attack()
     {
         isAttacking = true;
-        yield return new WaitForSeconds(AttackSpeed / 2);
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up, AttackRadius);
         for (int i = 0; i < info.Length; i++)
         {
@@ -107,7 +106,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
         Debug.Log(Time.time);
-        yield return new WaitForSeconds(AttackSpeed / 2);
+        yield return new WaitForSeconds(AttackSpeed);
         isAttacking = false;
         yield return null;
     }
