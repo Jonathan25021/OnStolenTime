@@ -471,6 +471,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6780276045550052130, guid: d2b93c8bcfcb17e40b09b45f1988678e,
+        type: 3}
+      propertyPath: AnubisProjectile
+      value: 
+      objectReference: {fileID: 4015687713251992726, guid: 821290b1ee1151345bd99fc5e779c539,
+        type: 3}
     - target: {fileID: 7909243961877162077, guid: d2b93c8bcfcb17e40b09b45f1988678e,
         type: 3}
       propertyPath: hairball

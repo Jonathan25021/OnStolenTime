@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class AnubisScript : EnemyScript
 {
-    public float attackDamageThump = 40;
-
+    Animator anim;
+    public float attackDamage = 50;
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerScript>().takeDamage(attackDamageThump);
+            anim.SetBool("attacking", true);
+            collision.gameObject.GetComponent<PlayerScript>().takeDamage(attackDamage);
         }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        anim.SetBool("attacking", false);
     }
 }

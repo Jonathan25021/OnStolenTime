@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6606381707514384786}
   - component: {fileID: 8342451429975233452}
   - component: {fileID: 4086818386071832878}
-  - component: {fileID: 3023009493362220991}
   - component: {fileID: 7343778566505958108}
+  - component: {fileID: 7834273809882139767}
   m_Layer: 0
   m_Name: LineOfSightProjectileAnubis
   m_TagString: Untagged
@@ -99,24 +99,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2
---- !u!114 &3023009493362220991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4187434796731072467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ca0a827325f66c48a760178e66db930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 40
-  ProjectileLocation: {fileID: 0}
-  hairball: {fileID: 4015687713251992726, guid: 635e9b13687b31f429460e1c6a86771d,
-    type: 3}
-  timeToReload: 3
-  fireSpeed: 7
 --- !u!114 &7343778566505958108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,3 +111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e8b0b255b493e4292bb3cbc7586877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7834273809882139767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4187434796731072467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f184f325d927041a9e51e86ba70511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 40
+  ProjectileLocation: {fileID: 0}
+  AnubisProjectile: {fileID: 4015687713251992726, guid: 821290b1ee1151345bd99fc5e779c539,
+    type: 3}
+  timeToReload: 3
+  fireSpeed: 7
