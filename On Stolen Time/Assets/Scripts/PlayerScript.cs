@@ -53,6 +53,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject chestplate;
     public GameObject leggings;
     public GameObject boots;
+    public float lastSwap = 0;
     #endregion
 
     #region time
@@ -158,6 +159,7 @@ public class PlayerScript : MonoBehaviour
         rewind();
         toggleSpeed();
         pickItem();
+        swapWeapon();
         if (currHealth <= 0)
         {
             Die();
@@ -175,6 +177,7 @@ public class PlayerScript : MonoBehaviour
         }
         currTimer -= rate * Time.deltaTime;
         lastUsed -= Time.deltaTime;
+        lastSwap -= Time.deltaTime;
     }
 
     private void toggleSpeed()
@@ -529,7 +532,7 @@ public class PlayerScript : MonoBehaviour
 
     #endregion
 
-    #region pickup
+    #region weapons
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Pickup") && !touching)
@@ -575,6 +578,16 @@ public class PlayerScript : MonoBehaviour
             pick = null;
             pickLoc = null;
             Debug.Log("picked");
+        }
+    }
+
+    private void swapWeapon()
+    {
+        if (Input.GetKey(KeyCode.Tab) && lastSwap <= 0)
+        {
+            GameObject temp = primaryWeapon;
+            primaryWeapon = secondaryWeapon;
+            secondaryWeapon =  temp;
         }
     }
     #endregion
