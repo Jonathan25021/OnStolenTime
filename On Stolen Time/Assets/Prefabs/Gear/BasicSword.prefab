@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 9037773003388585476}
   - component: {fileID: 6641582855461199922}
   - component: {fileID: 1158441222577515030}
-  - component: {fileID: -6881268210167642028}
-  - component: {fileID: 7478391767796931580}
   m_Layer: 0
   m_Name: BasicSword
   m_TagString: Pickup
@@ -28,13 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9037773003388585478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-<<<<<<< HEAD:On Stolen Time/Assets/Prefabs/BasicSword.prefab
-  m_LocalPosition: {x: 87.956474, y: 94.8211, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.8, z: 0}
-=======
   m_LocalPosition: {x: 0.837, y: -0.166, z: -10}
   m_LocalScale: {x: 3, y: 3, z: 1}
->>>>>>> cad19d68fbeed0725b807f6b6a3faad8b672431f:On Stolen Time/Assets/Prefabs/Gear/BasicSword.prefab
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,50 +95,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &-6881268210167642028
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9037773003388585478}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!61 &7478391767796931580
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9037773003388585478}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.02186355, y: -0.27949518}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.63}
-    oldSize: {x: 4, y: 4}
-    newSize: {x: 0.64, y: 0.64}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.63293105, y: 1.1576681}
-  m_EdgeRadius: 0
