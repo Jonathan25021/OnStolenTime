@@ -13,6 +13,7 @@ public class DungeonGengeratorScript : MonoBehaviour
     public GameObject wallTile;
     private bool playerSpawned;
     public GameObject[] enemies;
+    public GameObject Torch;
 
     public class SubDungeon
     {
@@ -307,6 +308,10 @@ public class DungeonGengeratorScript : MonoBehaviour
                         if (Random.Range(0,75) == 0)
                         {
                             Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(i, j, 0f), Quaternion.identity);
+                        }
+                        if (Random.Range(0,60) == 0)
+                        {
+                            Instantiate(Torch, new Vector3(i,j,0f), Quaternion.identity);
                         }
                     }
                     
