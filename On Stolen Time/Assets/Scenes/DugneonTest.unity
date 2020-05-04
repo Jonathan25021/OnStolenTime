@@ -316,7 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 --- !u!1001 &350709856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,9 +414,17 @@ PrefabInstance:
     m_RemovedComponents: []
 <<<<<<< HEAD
   m_SourcePrefab: {fileID: 100100000, guid: 47fa1486f60fc224d93ca4563f4a58c3, type: 3}
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+<<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+========
+>>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 --- !u!1 &355637311
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,13 +498,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 355637311}
   m_CullTransparentMesh: 0
+<<<<<<< HEAD
+=======
+<<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 =======
 >>>>>>> cad19d68fbeed0725b807f6b6a3faad8b672431f
 >>>>>>> 0e19a61a1cba8af69a16299e66b0d8b1defaa0e3:On Stolen Time/Assets/Scenes/DugneonTest.unity
 =======
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/DugneonTest.unity
+<<<<<<< HEAD
 =======
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+========
+>>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 --- !u!1 &514105133
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,12 +842,74 @@ TilemapRenderer:
   m_MaskInteraction: 0
 --- !u!1839735485 &853277579
 Tilemap:
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
 =======
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853277576}
+  m_Enabled: 1
+  m_Tiles: {}
+  m_AnimatedTiles: {}
+  m_TileAssetArray: []
+  m_TileSpriteArray: []
+  m_TileMatrixArray: []
+  m_TileColorArray: []
+  m_AnimationFrameRate: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Origin: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0, y: 0, z: 1}
+  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
+  m_TileOrientation: 0
+  m_TileOrientationMatrix:
+    e00: 1
+    e01: 0
+    e02: 0
+    e03: 0
+    e10: 0
+    e11: 1
+    e12: 0
+    e13: 0
+    e20: 0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+--- !u!1 &1104558654
+GameObject:
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104558656}
+  - component: {fileID: 1104558655}
+  m_Layer: 0
+  m_Name: Grid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!156049354 &1104558655
+Grid:
+>>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_GameObject: {fileID: 853277576}
   m_Enabled: 1
   m_Tiles: {}
@@ -878,68 +960,15 @@ GameObject:
   m_IsActive: 1
 --- !u!156049354 &1104558655
 Grid:
->>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
-  m_GameObject: {fileID: 853277576}
-  m_Enabled: 1
-  m_Tiles: {}
-  m_AnimatedTiles: {}
-  m_TileAssetArray: []
-  m_TileSpriteArray: []
-  m_TileMatrixArray: []
-  m_TileColorArray: []
-  m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0, y: 0, z: 1}
-  m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
-  m_TileOrientation: 0
-  m_TileOrientationMatrix:
-    e00: 1
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 1
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 1
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 1
---- !u!1 &1104558654
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1104558656}
-  - component: {fileID: 1104558655}
-  m_Layer: 0
-  m_Name: Grid
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!156049354 &1104558655
-Grid:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 =======
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_GameObject: {fileID: 1104558654}
   m_Enabled: 1
   m_CellSize: {x: 1, y: 1, z: 0}
@@ -1031,7 +1060,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+=======
+<<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_RootOrder: 4
@@ -1045,9 +1078,15 @@ Transform:
 =======
   m_RootOrder: 9
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/DugneonTest.unity
+<<<<<<< HEAD
 =======
   m_RootOrder: 9
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+========
+  m_RootOrder: 4
+>>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1802786069 stripped
 MonoBehaviour:
@@ -1265,7 +1304,11 @@ PrefabInstance:
 >>>>>>> jonathan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+=======
+<<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_SourcePrefab: {fileID: 100100000, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43, type: 3}
@@ -1281,10 +1324,17 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
 --- !u!1001 &782847220
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/DugneonTest.unity
+<<<<<<< HEAD
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
 --- !u!1001 &782847220
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+========
+  m_SourcePrefab: {fileID: 100100000, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43, type: 3}
+--- !u!1001 &9037773004594200187
+>>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1416,7 +1466,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+=======
+<<<<<<<< HEAD:On Stolen Time/Assets/Scenes/DugneonTest.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
   m_SourcePrefab: {fileID: 100100000, guid: 1b6e65c0ad341f94780befe1b696a10d, type: 3}
@@ -1427,6 +1481,12 @@ PrefabInstance:
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 546753aefb83e6d4c9629ca47cd0166c, type: 3}
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/DugneonTest.unity
+<<<<<<< HEAD
 =======
   m_SourcePrefab: {fileID: 100100000, guid: 546753aefb83e6d4c9629ca47cd0166c, type: 3}
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+=======
+========
+  m_SourcePrefab: {fileID: 100100000, guid: 1b6e65c0ad341f94780befe1b696a10d, type: 3}
+>>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33:On Stolen Time/Assets/Scenes/FinalScenes/MainGame.unity
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33

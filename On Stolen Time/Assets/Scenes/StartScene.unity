@@ -201,7 +201,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD:On Stolen Time/Assets/Scenes/StartScene.unity
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896378459
@@ -282,6 +285,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
 =======
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/SampleScene.unity
   m_RootOrder: 1
@@ -360,3 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
+=======
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33

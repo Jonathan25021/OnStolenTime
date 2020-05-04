@@ -121,10 +121,14 @@ NavMeshSettings:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &536335182
 =======
 --- !u!1 &1845928858
 >>>>>>> parent of da4dbf04... added lighting
+=======
+--- !u!1 &536335182
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,6 +136,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
 <<<<<<< HEAD
   - component: {fileID: 536335185}
   - component: {fileID: 536335184}
@@ -141,6 +146,11 @@ GameObject:
   - component: {fileID: 1845928860}
   - component: {fileID: 1845928859}
 >>>>>>> parent of da4dbf04... added lighting
+=======
+  - component: {fileID: 536335185}
+  - component: {fileID: 536335184}
+  - component: {fileID: 536335183}
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -149,15 +159,20 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!81 &536335183
 =======
 --- !u!81 &1845928859
 >>>>>>> parent of da4dbf04... added lighting
+=======
+--- !u!81 &536335183
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
   m_GameObject: {fileID: 536335182}
   m_Enabled: 1
@@ -167,16 +182,25 @@ AudioListener:
   m_Enabled: 1
 --- !u!20 &1845928860
 >>>>>>> parent of da4dbf04... added lighting
+=======
+  m_GameObject: {fileID: 536335182}
+  m_Enabled: 1
+--- !u!20 &536335184
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_GameObject: {fileID: 536335182}
 =======
   m_GameObject: {fileID: 1845928858}
 >>>>>>> parent of da4dbf04... added lighting
+=======
+  m_GameObject: {fileID: 536335182}
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -197,10 +221,14 @@ Camera:
   far clip plane: 1000
   field of view: 60
 <<<<<<< HEAD
+<<<<<<< HEAD
   orthographic: 1
 =======
   orthographic: 0
 >>>>>>> parent of da4dbf04... added lighting
+=======
+  orthographic: 1
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -218,22 +246,30 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!4 &536335185
 =======
 --- !u!4 &1845928861
 >>>>>>> parent of da4dbf04... added lighting
+=======
+--- !u!4 &536335185
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_GameObject: {fileID: 536335182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
 =======
   m_GameObject: {fileID: 1845928858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -325,6 +361,8 @@ Transform:
 =======
 >>>>>>> parent of da4dbf04... added lighting:On Stolen Time/Assets/Scenes/SampleScene.unity
 >>>>>>> parent of da4dbf04... added lighting
+=======
+>>>>>>> 1f71633ea20d2f2c29e89486055f9606d4498b33
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4029058909318919942
