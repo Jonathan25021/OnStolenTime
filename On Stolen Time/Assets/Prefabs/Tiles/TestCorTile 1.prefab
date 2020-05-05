@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3870208536726631408}
   - component: {fileID: -5766231313610537761}
   - component: {fileID: -1058031533819680054}
-  m_Layer: 31
+  m_Layer: 16
   m_Name: TestCorTile 1
   m_TagString: FloorTile
   m_Icon: {fileID: 0}

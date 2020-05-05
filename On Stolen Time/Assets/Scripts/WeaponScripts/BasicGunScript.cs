@@ -7,8 +7,6 @@ public class BasicGunScript : RangedWeaponScript
     // Start is called before the first frame update
     void Start()
     {
-        _ammo = 36;
-        _magSize = 6;
         _currMag = _magSize;
     }
 
@@ -28,7 +26,8 @@ public class BasicGunScript : RangedWeaponScript
         }
         else
         {
-            RaycastHit2D hit = Physics2D.Raycast(position, dir);
+            RaycastHit2D hit = Physics2D.Raycast(position, dir, Mathf.Infinity, ~(1 << 16));
+            Debug.Log(hit.transform.gameObject);
             if (hit && hit.transform.CompareTag("Enemy"))
             {
                 hit.transform.GetComponent<EnemyScript>().TakeDamage(_damage);

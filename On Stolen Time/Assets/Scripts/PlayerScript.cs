@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     public float baseMoveSpeed = 3;
     public float sprintMoveSpeed = 5;
     private Rigidbody2D playerRB;
-    private Vector3 dir;
+    public Vector3 dir;
     // stamina
     private bool sprinting;
     public float maxStamina = 100;
@@ -95,6 +95,8 @@ public class PlayerScript : MonoBehaviour
         secondaryWeapon = Instantiate(secondaryWeapon) as GameObject;
         primaryWeapon.transform.parent = this.transform;
         secondaryWeapon.transform.parent = this.transform;
+        primaryWeapon.transform.position = this.transform.position + new Vector3(0, 0, -10);
+        secondaryWeapon.transform.position = this.transform.position + new Vector3(0, 0, -10);
         anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
@@ -109,6 +111,7 @@ public class PlayerScript : MonoBehaviour
         sword = transform.GetChild(0).gameObject;
         sword.transform.localScale = new Vector3(0, 0, 2);
         rewindedPos = transform.position;
+        
     }
 
     void Update()
@@ -421,6 +424,8 @@ public class PlayerScript : MonoBehaviour
 
     private void RangeAttackCheck()
     {
+        Transform laser = transform.GetChild(0);
+        laser.GetComponent<LaserScript>().LaserToggle = true;
         if (Input.GetMouseButtonUp(mouseButton))
         {
             Debug.Log("Fire");
@@ -432,8 +437,8 @@ public class PlayerScript : MonoBehaviour
             {
                 StartCoroutine(RangedAttackRoutine(secondaryWeapon));
             }
-            
-            
+
+            laser.GetComponent<LaserScript>().LaserToggle = false;
         }
         if (timeInRangeAttack < 1f)
         {
@@ -449,7 +454,7 @@ public class PlayerScript : MonoBehaviour
     {
         anim.SetTrigger("leftAttack");
         state = State.Fire;
-        yield return StartCoroutine(weapon.GetComponent<RangedWeaponScript>().Fire(transform.position, dir));
+        yield return StartCoroutine(weapon.GetComponent<RangedWeaponScript>().Fire(transform.GetChild(0).position, dir));
         state = State.Normal;
     }
 

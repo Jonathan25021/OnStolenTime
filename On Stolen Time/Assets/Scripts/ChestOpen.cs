@@ -6,11 +6,11 @@ public class ChestOpen : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Items to spawn.")]
-    private GameObject[] drops;
+    public GameObject[] drops;
 
     [SerializeField]
     [Tooltip("Opened sprite.")]
-    private Sprite opened;
+    public Sprite opened;
 
     private bool closed = true;
 

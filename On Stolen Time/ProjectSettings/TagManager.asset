@@ -25,29 +25,32 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - WallTiles
   - GroundTiles
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
     locked: 0
   - name: GroundTiles
     uniqueID: 1743909561
+    locked: 0
+  - name: WallTiles
+    uniqueID: 2375153117
     locked: 0
   - name: Pickups
     uniqueID: 574288853
