@@ -48,11 +48,11 @@ public class PlayerScript : MonoBehaviour
     private int currWeapon;
     private bool rangeAttack;
     private float panRange;
-    private GameObject sword;
     public GameObject helmet;
     public GameObject chestplate;
     public GameObject leggings;
     public GameObject boots;
+    public ArrayList PickupItems;
     #endregion
 
     #region time
@@ -91,12 +91,13 @@ public class PlayerScript : MonoBehaviour
     #region UnityFuncs
     void Start()
     {
+        PickupItems = new ArrayList();
         primaryWeapon = Instantiate(primaryWeapon) as GameObject;
         secondaryWeapon = Instantiate(secondaryWeapon) as GameObject;
         primaryWeapon.transform.parent = this.transform;
         secondaryWeapon.transform.parent = this.transform;
-        primaryWeapon.transform.position = this.transform.position + new Vector3(0, 0, -10);
-        secondaryWeapon.transform.position = this.transform.position + new Vector3(0, 0, -10);
+        primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
+        secondaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
         anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
@@ -108,8 +109,6 @@ public class PlayerScript : MonoBehaviour
         StaminaBar.value = staminaRatio();
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         rollCooldown = 0;
-        sword = transform.GetChild(0).gameObject;
-        sword.transform.localScale = new Vector3(0, 0, 2);
         rewindedPos = transform.position;
         
     }
@@ -129,6 +128,7 @@ public class PlayerScript : MonoBehaviour
                 lookAtMouse();
                 rollCheck();
                 attackCheck();
+                inventoryCheck();
                 break;
             case State.Roll:
                 roll();
@@ -357,6 +357,49 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region combatFuncs
+    private void inventoryCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            flip();
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            swap();
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (primaryWeapon.GetComponent<WeaponScript>().WeaponType() == 1)
+            {
+                StartCoroutine(primaryWeapon.GetComponent<RangedWeaponScript>().Reload());
+            }
+            if (secondaryWeapon.GetComponent<WeaponScript>().WeaponType() == 1)
+            {
+                StartCoroutine(secondaryWeapon.GetComponent<RangedWeaponScript>().Reload());
+            }
+        }
+    }
+
+    private void swap()
+    {
+        if (PickupItems.Count > 0)
+        {
+            primaryWeapon.transform.localPosition = new Vector3(0, 0, 0);
+            primaryWeapon.transform.parent = null;
+            primaryWeapon = (GameObject) PickupItems[0];
+            primaryWeapon.transform.parent = this.transform;
+            primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
+        }
+    }
+
+    private void flip()
+    {
+        GameObject temp = primaryWeapon;
+        primaryWeapon = secondaryWeapon;
+        secondaryWeapon = temp;
+    }
+
+
     private void attackCheck()
     {
         if (Input.GetMouseButton(0))
@@ -398,13 +441,15 @@ public class PlayerScript : MonoBehaviour
         state = State.Attack;
         playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up * .8f, 0.5f);
-        Vector3 start = new Vector3(1, 0, 1);
-        Vector3 end = new Vector3(1, 2, 1);
         float ELAtime = 0;
+        weapon.transform.localPosition = new Vector3(.44f,-.85f,0);
+        Quaternion start = Quaternion.Euler(0,0,-50);
+        Quaternion end = Quaternion.Euler(0, 0, 0);
         while (ELAtime < weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2)
         {
+            Debug.Log(ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
             ELAtime += Time.deltaTime;
-            sword.transform.localScale = Vector3.Lerp(start, end, 2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
+            weapon.transform.localRotation = Quaternion.Lerp(start, end, 2f * ELAtime / weapon.GetComponent<MeleeWeaponScript>().AttackSpeed());
             yield return null;
         }
         Debug.Log("finish attack");
@@ -415,8 +460,8 @@ public class PlayerScript : MonoBehaviour
                 info[i].GetComponent<EnemyScript>().TakeDamage(weapon.GetComponent<MeleeWeaponScript>().Damage());
             }
         }
+        weapon.transform.localPosition = new Vector3(0, 0, -100);
         playerRB.freezeRotation = false;
-        sword.transform.localScale = new Vector3(0, 0, 0);
         Debug.Log("finish attack");
         yield return new WaitForSeconds(weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2);
         state = State.Normal;

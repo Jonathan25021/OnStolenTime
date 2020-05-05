@@ -30,8 +30,12 @@ public class GameManager : MonoBehaviour
     #region transitions
     public void StartGame()
     {
-        SceneManager.LoadScene("PlayTestScene1");
+        SceneManager.LoadScene("StartScreen");
     }
     
+    public void LoadMainGame()
+    {
+        SceneManager.LoadScene("MainGame");
+    }
     #endregion
 }

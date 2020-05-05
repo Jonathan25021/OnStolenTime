@@ -29,15 +29,17 @@ public abstract class RangedWeaponScript : WeaponScript
         }
         else if (_ammo < _currMag)
         {
+            yield return new WaitForSeconds(reloadTime);
             _currMag = _ammo;
             _ammo = 0;
-            yield return new WaitForSeconds(reloadTime);
+            yield return null;
         }
         else
         {
+            yield return new WaitForSeconds(reloadTime);
             _ammo -= (_magSize - _currMag);
             _currMag = _magSize;
-            yield return new WaitForSeconds(reloadTime);
+            yield return null;
         }
         Debug.Log("reloading");
     }

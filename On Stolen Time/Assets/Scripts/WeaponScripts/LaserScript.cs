@@ -27,9 +27,8 @@ public class LaserScript : MonoBehaviour
         {
             lineRenderer.enabled = false;
         }
-
-        //- transform.up
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, GetComponentInParent<PlayerScript>().dir, Mathf.Infinity, ~(1<<16));
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, GetComponentInParent<PlayerScript>().dir, Mathf.Infinity, ~(1<<16 | 1<<5));
         
         LaserHit.position = hit.point;
         lineRenderer.SetPosition(0, transform.position);

@@ -26,7 +26,7 @@ public class BasicGunScript : RangedWeaponScript
         }
         else
         {
-            RaycastHit2D hit = Physics2D.Raycast(position, dir, Mathf.Infinity, ~(1 << 16));
+            RaycastHit2D hit = Physics2D.Raycast(position, dir, Mathf.Infinity, ~(1 << 16 | 1 << 5));
             Debug.Log(hit.transform.gameObject);
             if (hit && hit.transform.CompareTag("Enemy"))
             {
