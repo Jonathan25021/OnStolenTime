@@ -52,6 +52,7 @@ public class EnemyScript : MonoBehaviour
             case State.Idle:
                 anim.SetBool("idle", true);
                 anim.SetBool("moving", false);
+                anim.SetBool("attacking", false);
                 enemyRB.velocity = Vector2.zero;
                 break;
             case State.Alert:
@@ -62,10 +63,12 @@ public class EnemyScript : MonoBehaviour
                 }
                 anim.SetBool("idle", false);
                 anim.SetBool("moving", true);
+                anim.SetBool("attacking", false);
                 break;
             case State.Attack:
                 anim.SetBool("idle", false);
-                anim.SetBool("moving", true);
+                anim.SetBool("moving", false);
+                anim.SetBool("attacking", true);
                 break;
         }
     }
