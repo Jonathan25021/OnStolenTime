@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-
+    public GameManager GM;
     #region healthVars
     public float maxHealth = 100;
     private float currHealth;
@@ -389,6 +389,7 @@ public class PlayerScript : MonoBehaviour
             primaryWeapon = (GameObject) PickupItems[0];
             primaryWeapon.transform.parent = this.transform;
             primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
+            primaryWeapon.transform.localRotation = Quaternion.identity;
         }
     }
 
@@ -429,6 +430,7 @@ public class PlayerScript : MonoBehaviour
         {
             state = State.Aim;
             timeInRangeAttack = 0;
+            weapon.GetComponent<RangedWeaponScript>().TopDownSprite();
         }
         else if (weapon.GetComponent<WeaponScript>().WeaponType() == 2)
         {
@@ -442,7 +444,7 @@ public class PlayerScript : MonoBehaviour
         playerRB.freezeRotation = true;
         Collider2D[] info = Physics2D.OverlapCircleAll(transform.position - transform.up * .8f, 0.5f);
         float ELAtime = 0;
-        weapon.transform.localPosition = new Vector3(.44f,-.85f,0);
+        weapon.transform.localPosition = new Vector3(.44f,-.85f, 100);
         Quaternion start = Quaternion.Euler(0,0,-50);
         Quaternion end = Quaternion.Euler(0, 0, 0);
         while (ELAtime < weapon.GetComponent<MeleeWeaponScript>().AttackSpeed() / 2)
@@ -469,20 +471,25 @@ public class PlayerScript : MonoBehaviour
 
     private void RangeAttackCheck()
     {
+        GameObject weapon;
+        if (mouseButton == 0)
+        {
+            weapon = primaryWeapon;
+        }
+        else
+        {
+            weapon = secondaryWeapon;
+        }
+        weapon.transform.localPosition = new Vector3(.44f, -.85f, -1);
         Transform laser = transform.GetChild(0);
         laser.GetComponent<LaserScript>().LaserToggle = true;
         if (Input.GetMouseButtonUp(mouseButton))
         {
             Debug.Log("Fire");
-            if (mouseButton == 0)
-            {
-                StartCoroutine(RangedAttackRoutine(primaryWeapon));
-            }
-            else
-            {
-                StartCoroutine(RangedAttackRoutine(secondaryWeapon));
-            }
-
+            
+            StartCoroutine(RangedAttackRoutine(weapon));
+            weapon.transform.localPosition = new Vector3(0, 0, -100);
+            weapon.GetComponent<RangedWeaponScript>().IconSprite();
             laser.GetComponent<LaserScript>().LaserToggle = false;
         }
         if (timeInRangeAttack < 1f)
@@ -563,8 +570,8 @@ public class PlayerScript : MonoBehaviour
     private void Die()
     {
         Debug.Log("died");
-        //GameObject.FindWithTag("GameController").GetComponent<GameManager>().StartGame();
-        Destroy(this.gameObject);
+        GM.GetComponent<GameManager>().StartGame();
+        //Destroy(this.gameObject);
         Debug.Log("player died");
     }
     #endregion

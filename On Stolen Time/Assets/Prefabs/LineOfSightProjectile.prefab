@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4086818386071832878}
   - component: {fileID: 3023009493362220991}
   - component: {fileID: 7343778566505958108}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LineOfSightProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

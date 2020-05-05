@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8342451429975233452}
   - component: {fileID: 4086818386071832878}
   - component: {fileID: 1361469665239173745}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LineOfSight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

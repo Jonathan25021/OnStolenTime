@@ -101,7 +101,6 @@ public class EnemyScript : MonoBehaviour
                 info[i].GetComponent<PlayerScript>().takeDamage(Damage);
             }
         }
-        Debug.Log(Time.time);
         yield return new WaitForSeconds(AttackSpeed / 2);
         isAttacking = false;
         yield return null;
@@ -121,7 +120,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Debug.Log(currHealth);
-        enemyRB.velocity = -enemyRB.velocity;
+        enemyRB.velocity = -3 * enemyRB.velocity;
         currHealth -= damage;
         Debug.Log(currHealth);
         if (currHealth <= 0)

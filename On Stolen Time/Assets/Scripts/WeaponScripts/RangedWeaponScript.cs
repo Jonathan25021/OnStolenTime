@@ -9,6 +9,8 @@ public abstract class RangedWeaponScript : WeaponScript
     public int _magSize;
     public int _currMag;
     public float reloadTime;
+    public Sprite TopDown;
+    public Sprite Icon;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +59,16 @@ public abstract class RangedWeaponScript : WeaponScript
     public float RangeFactor()
     {
         return _rangeFactor;
+    }
+
+    public void TopDownSprite()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = TopDown;
+    }
+
+    public void IconSprite()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = Icon;
     }
 
     abstract public IEnumerator Fire(Vector3 position, Vector3 dir);

@@ -14,6 +14,7 @@ public class DungeonGengeratorScript : MonoBehaviour
     private bool playerSpawned;
     public GameObject[] enemies;
     public GameObject Torch;
+    public GameObject Chest;
 
     public class SubDungeon
     {
@@ -304,6 +305,13 @@ public class DungeonGengeratorScript : MonoBehaviour
                         else
                         {
                             setTileHard(floorTiles[Random.Range(0, floorTiles.Length - 1)], i, j);
+                            if (Random.Range(0,200) == 0)
+                            {
+                                GameObject chest = Instantiate(Chest, new Vector3(i,j,0f), Quaternion.identity);
+                                int numItems = Random.Range(1, 5);
+                                chest.GetComponent<ChestOpen>().numDrops = numItems;
+
+                            }
                         }
                         if (Random.Range(0,75) == 0)
                         {

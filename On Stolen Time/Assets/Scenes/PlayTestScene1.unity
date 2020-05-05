@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
       propertyPath: enemies.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
@@ -334,6 +334,30 @@ PrefabInstance:
       propertyPath: boardColumns
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
+        type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 6561833630054420367, guid: 7885f41a0ffedd74db33fe718b700e90,
+        type: 3}
+    - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
+        type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 6561833630054420367, guid: d0f430aacf264584ea5266490f98c6e4,
+        type: 3}
+    - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
+        type: 3}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 6561833630054420367, guid: 94a0bb8a510c6b64fafaaefab753e3cc,
+        type: 3}
+    - target: {fileID: 3802248807039916516, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
+        type: 3}
+      propertyPath: Chest
+      value: 
+      objectReference: {fileID: 3773141250251707622, guid: 272ebd344490f4972a2400a9fa6636c4,
+        type: 3}
     - target: {fileID: 3802248807039916517, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -743,30 +767,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 230362142, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.479
-      objectReference: {fileID: 0}
-    - target: {fileID: 230362142, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 3.37
-      objectReference: {fileID: 0}
     - target: {fileID: 1209138625, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
       propertyPath: LaserHit
       value: 
       objectReference: {fileID: 274957202}
-    - target: {fileID: 1948858431, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 1948858431, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 0.824
-      objectReference: {fileID: 0}
-    - target: {fileID: 1948858431, guid: 556dcbfad8359be4d91b04a567c91278, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 1.06
-      objectReference: {fileID: 0}
     - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: HealthBar
@@ -831,11 +835,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3828310306175510500, guid: 556dcbfad8359be4d91b04a567c91278,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4613374257381417753, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}

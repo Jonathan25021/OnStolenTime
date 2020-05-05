@@ -8,9 +8,12 @@ public class ChestOpen : MonoBehaviour
     [Tooltip("Items to spawn.")]
     public GameObject[] drops;
 
+    public int numDrops;
     [SerializeField]
     [Tooltip("Opened sprite.")]
     public Sprite opened;
+
+
 
     private bool closed = true;
 
@@ -18,10 +21,13 @@ public class ChestOpen : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && closed)
         {
-            float toSpawn = Random.Range(0, 1.0f);
-            int index = Mathf.RoundToInt(toSpawn * drops.Length);
-            GameObject dropped = drops[index];
-            Instantiate(dropped, collision.transform.position, collision.transform.rotation);
+            for (int i = 0; i < numDrops; i++)
+            {
+                int index = Random.Range(0, drops.Length);
+                GameObject dropped = drops[index];
+                Instantiate(dropped, collision.transform.position, collision.transform.rotation);
+            }
+           
             gameObject.GetComponent<SpriteRenderer>().sprite = opened;
             closed = false;
         }
