@@ -256,7 +256,6 @@ public class PlayerScript : MonoBehaviour
             primaryWeapon = rewindedFirstWeapon;
             secondaryWeapon = rewindedSecondWeapon;
             lastUsed = 2;
-            cost += cost;
         }
     }
     #endregion

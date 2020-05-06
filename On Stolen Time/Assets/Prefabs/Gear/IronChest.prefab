@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flatDamageModifier: 3
-  percentDamageModifier: 3
+  percentDamageModifier: 0.03
   type: 1
 --- !u!212 &-1400583057416759666
 SpriteRenderer:

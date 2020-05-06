@@ -322,7 +322,6 @@ public class DungeonGengeratorScript : MonoBehaviour
                             Instantiate(Torch, new Vector3(i,j,0f), Quaternion.identity);
                         }
                     }
-                    
                 }
             }
             if (!playerSpawned)
@@ -396,7 +395,7 @@ public class DungeonGengeratorScript : MonoBehaviour
         instance.transform.SetParent(transform);
         boardPositionsFloor[i, j] = instance;
     }
-
+    
     void Start()
     {
         playerSpawned = false;

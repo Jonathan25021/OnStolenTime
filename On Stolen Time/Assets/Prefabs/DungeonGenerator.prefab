@@ -47,8 +47,21 @@ MonoBehaviour:
   boardColumns: 100
   minRoomSize: 10
   maxRoomSize: 15
+  floorTiles: []
   floorTile: {fileID: 185571763658607565, guid: 7b92529f0cbd917408a22c265eff0039,
     type: 3}
+  floorTileN: {fileID: 0}
+  floorTileNE: {fileID: 0}
+  floorTileE: {fileID: 0}
+  floorTileSE: {fileID: 0}
+  floorTileS: {fileID: 0}
+  floorTileSW: {fileID: 0}
+  floorTileW: {fileID: 0}
+  floorTileNW: {fileID: 0}
   corridorTile: {fileID: 185571763658607565, guid: 7b92529f0cbd917408a22c265eff0039,
     type: 3}
   wallTile: {fileID: 0}
+  enemies: []
+  Torch: {fileID: 0}
+  Chest: {fileID: 0}
+  GM: {fileID: 2645836147656663212, guid: a604c011116453b469ed0afc8024d202, type: 3}

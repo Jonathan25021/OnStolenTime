@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     #region unity_funcs
     private void Awake()
     {
+        /**
         if (instance == null)
         {
             instance = this;
@@ -21,7 +22,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
+    **/
         DontDestroyOnLoad(this.gameObject);
     }
 
