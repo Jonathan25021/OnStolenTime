@@ -38,9 +38,11 @@ public class CountdownUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         float portion = m_Player.currTimer / slice;
         int rounded = Mathf.RoundToInt(portion);
-        m_Image.sprite = m_Sprites[rounded - 1];
+        Debug.Log(portion);
+        m_Image.sprite = m_Sprites[Mathf.Max(rounded - 1,0)];
         m_Text.text = (Mathf.Round(m_Player.currTimer * 100.0f) / 100.0f).ToString();
     }
 }

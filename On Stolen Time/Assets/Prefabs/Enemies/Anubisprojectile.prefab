@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4165071335334823474}
   - component: {fileID: 4228036624371482502}
   - component: {fileID: 8569332353062817894}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Anubisprojectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4015687713251992726}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.9657335, y: 0.23040457, z: -752.2084}
+  m_LocalPosition: {x: 3.9657335, y: 0.23040457, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilespeed: 4
-  attackDamage: 10
+  attackDamage: 40
   TimeToLive: 5
 --- !u!212 &4165071335334823474
 SpriteRenderer:

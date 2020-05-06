@@ -433,7 +433,7 @@ PrefabInstance:
     - target: {fileID: 3802248807039916522, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e8ed472c2bc5ec488ff7dc8115d4f43, type: 3}
@@ -450,6 +450,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1417052664, guid: 546753aefb83e6d4c9629ca47cd0166c, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 617047329}
     - target: {fileID: 1545886926, guid: 546753aefb83e6d4c9629ca47cd0166c, type: 3}
       propertyPath: Player
       value: 
@@ -798,15 +802,44 @@ PrefabInstance:
       propertyPath: GM
       value: 
       objectReference: {fileID: 460066395}
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: chest
+      value: 
+      objectReference: {fileID: 8575701149824675640, guid: 39a1723ce2cee5541a3e46c5cb24cb01,
+        type: 3}
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: boots
+      value: 
+      objectReference: {fileID: 8575701149824675640, guid: 45a28e63479ccb14e9650b09247b3a13,
+        type: 3}
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: head
+      value: 
+      objectReference: {fileID: 8575701149824675640, guid: f1bf2eef45b9f7c4eacfcf1743e3ea13,
+        type: 3}
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: legs
+      value: 
+      objectReference: {fileID: 8575701149824675640, guid: b629566014d297049b426ccef873a98a,
+        type: 3}
+    - target: {fileID: 1047212678380562475, guid: 556dcbfad8359be4d91b04a567c91278,
+        type: 3}
+      propertyPath: startTimer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.33
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.48
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 2363902743550078259, guid: 556dcbfad8359be4d91b04a567c91278,
         type: 3}

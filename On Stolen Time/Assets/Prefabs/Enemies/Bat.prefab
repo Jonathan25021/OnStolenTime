@@ -157,7 +157,7 @@ MonoBehaviour:
   baseMoveSpeed: 3
   Damage: 10
   AttackSpeed: 0.75
-  AttackRadius: 0.3
+  AttackRadius: 0.1
   attackDamage: 5
 --- !u!1001 &4615673317998323412
 PrefabInstance:

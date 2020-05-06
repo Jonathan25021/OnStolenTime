@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -48,9 +49,9 @@ public class PlayerScript : MonoBehaviour
     private int currWeapon;
     private bool rangeAttack;
     private float panRange;
-    public GameObject helmet;
-    public GameObject chestplate;
-    public GameObject leggings;
+    public GameObject head;
+    public GameObject chest;
+    public GameObject legs;
     public GameObject boots;
     public ArrayList PickupItems;
     #endregion
@@ -98,6 +99,18 @@ public class PlayerScript : MonoBehaviour
         secondaryWeapon.transform.parent = this.transform;
         primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
         secondaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
+        head = Instantiate(head) as GameObject;
+        head.transform.parent = this.transform;
+        head.transform.localPosition = new Vector3(0, 0, -100);
+        chest = Instantiate(chest) as GameObject;
+        chest.transform.parent = this.transform;
+        chest.transform.localPosition = new Vector3(0, 0, -100);
+        legs = Instantiate(legs) as GameObject;
+        legs.transform.parent = this.transform;
+        legs.transform.localPosition = new Vector3(0, 0, -100);
+        boots = Instantiate(boots) as GameObject;
+        boots.transform.parent = this.transform;
+        boots.transform.localPosition = new Vector3(0, 0, -100);
         anim = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         currStamina = maxStamina;
@@ -112,6 +125,7 @@ public class PlayerScript : MonoBehaviour
         rewindedPos = transform.position;
         
     }
+    
 
     void Update()
     {
@@ -165,7 +179,8 @@ public class PlayerScript : MonoBehaviour
     {
         if (currTimer < 0)
         {
-            Die();
+            GM.LoadBossLevel(this.gameObject);
+
         }
         currTimer -= rate * Time.deltaTime;
         lastUsed -= Time.deltaTime;
@@ -173,6 +188,7 @@ public class PlayerScript : MonoBehaviour
 
     private void toggleSpeed()
     {
+        /**
         if (Input.GetKeyDown(KeyCode.T) && !slow)
         {
             slow = true;
@@ -192,9 +208,10 @@ public class PlayerScript : MonoBehaviour
                 enemy.GetComponent<EnemyScript>().speed();
             }
         }
+    **/
         if (Input.GetKeyDown(KeyCode.G) && !slow)
         {
-            baseMoveSpeed = 2;
+            baseMoveSpeed = baseMoveSpeed * 2/3;
             slow = true;
             rate = 2;
             foreach (GameObject enemy in allEnemies)
@@ -203,7 +220,7 @@ public class PlayerScript : MonoBehaviour
             }
         } else if (Input.GetKeyDown(KeyCode.G) && slow)
         {
-            baseMoveSpeed = 3;
+            baseMoveSpeed = baseMoveSpeed * 3/2f;
             slow = false;
             rate = 1;
             foreach (GameObject enemy in allEnemies)
@@ -365,7 +382,8 @@ public class PlayerScript : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E))
         {
-            swap();
+            Debug.Log(PickupItems[0]);
+            swapItem();
         }
         else if (Input.GetKeyDown(KeyCode.R))
         {
@@ -380,16 +398,88 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    private void swap()
+    private void swapItem()
     {
         if (PickupItems.Count > 0)
         {
-            primaryWeapon.transform.localPosition = new Vector3(0, 0, 0);
-            primaryWeapon.transform.parent = null;
-            primaryWeapon = (GameObject) PickupItems[0];
-            primaryWeapon.transform.parent = this.transform;
-            primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
-            primaryWeapon.transform.localRotation = Quaternion.identity;
+            GameObject swap = (GameObject) PickupItems[0];
+            if (swap.GetComponent<PickupScript>().PickupType() == 0)
+            {
+                primaryWeapon.transform.localPosition = new Vector3(0, 0, 0);
+                primaryWeapon.transform.parent = null;
+                primaryWeapon = swap;
+                primaryWeapon.transform.parent = this.transform;
+                primaryWeapon.transform.localPosition = new Vector3(0, 0, -100);
+                primaryWeapon.transform.localRotation = Quaternion.identity;
+            }
+            else if (swap.GetComponent<PickupScript>().PickupType() == 1)
+            {
+                int armorType = swap.GetComponent<ArmorScript>().type;
+                if (armorType == 0)
+                {
+                    if (head.GetComponent<ArmorScript>().type == -1)
+                    {
+                        Destroy(head.gameObject);
+                    }
+                    else
+                    {
+                        head.transform.localPosition = new Vector3(0, 0, 0);
+                        head.transform.parent = null;
+                    }
+                    head = swap;
+                    head.transform.parent = this.transform;
+                    head.transform.localPosition = new Vector3(0, 0, -100);
+                    head.transform.localRotation = Quaternion.identity;
+                }
+                else if (armorType == 1)
+                {
+                    if (chest.GetComponent<ArmorScript>().type == -1)
+                    {
+                        Destroy(chest.gameObject);
+                    }
+                    else
+                    {
+                        chest.transform.localPosition = new Vector3(0, 0, 0);
+                        chest.transform.parent = null;
+                    }
+                    chest = swap;
+                    chest.transform.parent = this.transform;
+                    chest.transform.localPosition = new Vector3(0, 0, -100);
+                    chest.transform.localRotation = Quaternion.identity;
+                }
+                else if (armorType == 2)
+                {
+                    if (legs.GetComponent<ArmorScript>().type == -1)
+                    {
+                        Destroy(legs.gameObject);
+                    }
+                    else
+                    {
+                        legs.transform.localPosition = new Vector3(0, 0, 0);
+                        legs.transform.parent = null;
+                    }
+                    legs = swap;
+                    legs.transform.parent = this.transform;
+                    legs.transform.localPosition = new Vector3(0, 0, -100);
+                    legs.transform.localRotation = Quaternion.identity;
+                }
+                else
+                {
+                    if (boots.GetComponent<ArmorScript>().type == -1)
+                    {
+                        Destroy(boots.gameObject);
+                    }
+                    else
+                    {
+                        boots.transform.localPosition = new Vector3(0, 0, 0);
+                        boots.transform.parent = null;
+                    }
+                    boots = swap;
+                    boots.transform.parent = this.transform;
+                    boots.transform.localPosition = new Vector3(0, 0, -100);
+                    boots.transform.localRotation = Quaternion.identity;
+                }
+            }
         }
     }
 
@@ -533,17 +623,17 @@ public class PlayerScript : MonoBehaviour
 
     private float totalPercentDamageModifier()
     {
-        return helmet.GetComponent<ArmorScript>().percentDamageModifier
-            + chestplate.GetComponent<ArmorScript>().percentDamageModifier
-            + leggings.GetComponent<ArmorScript>().percentDamageModifier
+        return head.GetComponent<ArmorScript>().percentDamageModifier
+            + chest.GetComponent<ArmorScript>().percentDamageModifier
+            + legs.GetComponent<ArmorScript>().percentDamageModifier
             + boots.GetComponent<ArmorScript>().percentDamageModifier;
     }
 
     private float totalFlatDamageModifier()
     {
-        return helmet.GetComponent<ArmorScript>().flatDamageModifier
-            + chestplate.GetComponent<ArmorScript>().flatDamageModifier
-            + leggings.GetComponent<ArmorScript>().flatDamageModifier
+        return head.GetComponent<ArmorScript>().flatDamageModifier
+            + chest.GetComponent<ArmorScript>().flatDamageModifier
+            + legs.GetComponent<ArmorScript>().flatDamageModifier
             + boots.GetComponent<ArmorScript>().flatDamageModifier;
     }
     IEnumerator DamageIndicator()

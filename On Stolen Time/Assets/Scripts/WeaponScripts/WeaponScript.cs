@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponScript : MonoBehaviour
+public abstract class WeaponScript : PickupScript
 {
     public float _damage;
     public float _attackSpeed;
@@ -29,5 +29,10 @@ public abstract class WeaponScript : MonoBehaviour
     public float AttackSpeed()
     {
         return _attackSpeed;
+    }
+
+    override public int PickupType()
+    {
+        return 0;
     }
 }

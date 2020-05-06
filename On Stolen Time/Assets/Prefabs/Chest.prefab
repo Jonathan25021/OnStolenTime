@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3773141250251707622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 327.5, y: 165.5, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,7 +97,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drops:
   - {fileID: 9037773003388585478, guid: 1b6e65c0ad341f94780befe1b696a10d, type: 3}
+  - {fileID: 9037773003388585478, guid: 4b7c70b89c14fba4995a28e33f83bd2b, type: 3}
+  - {fileID: 9037773003388585478, guid: e7387aa7f10f2fe40bc95c6a88df9729, type: 3}
   - {fileID: 7129834263746905214, guid: 47fa1486f60fc224d93ca4563f4a58c3, type: 3}
+  - {fileID: 7129834263746905214, guid: bace9cc7889e7c2409943dbe440319d8, type: 3}
+  - {fileID: 7129834263746905214, guid: 70aac1cd8f3311c4794c87e7d67b0bf8, type: 3}
+  - {fileID: 8575701149824675640, guid: a8bfe5b1f841e544e824acd74145fcf2, type: 3}
+  - {fileID: 8575701149824675640, guid: a97f81380d75c1845bc036be2e98939f, type: 3}
+  - {fileID: 8575701149824675640, guid: 3233c211ecd34f843bdb0310ec9c97ac, type: 3}
+  - {fileID: 8575701149824675640, guid: ed446b9231bf39e4cbb5ee9d1c685405, type: 3}
+  - {fileID: 8575701149824675640, guid: a77e04a1500faf8438b0702dbb28510b, type: 3}
+  - {fileID: 8575701149824675640, guid: 1dcb1a19cc98ccd42a685c8f5bf16b8b, type: 3}
+  - {fileID: 8575701149824675640, guid: 2086da7f6aca0a843b48d7968e2ca82f, type: 3}
+  - {fileID: 8575701149824675640, guid: 20d50da49bd427e4b86196e506c37d9c, type: 3}
+  - {fileID: 8575701149824675640, guid: 469df2d032fe6d148b155731772f1aa1, type: 3}
+  - {fileID: 8575701149824675640, guid: 6dd1891d360535149b553dad9f18093c, type: 3}
+  - {fileID: 8575701149824675640, guid: c18ba76e3a9a9a64987ee08688364d6d, type: 3}
+  - {fileID: 8575701149824675640, guid: 960680da90d151d43836081144c662b7, type: 3}
+  numDrops: 1
   opened: {fileID: 21300000, guid: 3825055f9947a4eb88c1d4e0d2973e76, type: 3}
 --- !u!50 &5577606489480645269
 Rigidbody2D:
@@ -137,12 +154,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.36103314, y: 0.24363199}
+  m_Size: {x: 0.56, y: 0.37}
   m_EdgeRadius: 0

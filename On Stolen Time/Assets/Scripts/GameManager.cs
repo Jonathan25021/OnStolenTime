@@ -37,5 +37,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainGame");
     }
+    public void LoadBossLevel(GameObject player)
+    {
+        SceneManager.LoadScene("BossScene");
+        SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByName("BossScene"));
+    }
     #endregion
 }

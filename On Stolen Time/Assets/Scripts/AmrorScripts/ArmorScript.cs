@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorScript : MonoBehaviour
+public class ArmorScript : PickupScript
 {
     public float flatDamageModifier;
     public float percentDamageModifier;
@@ -25,5 +25,9 @@ public class ArmorScript : MonoBehaviour
     public int Type()
     {
         return type;
+    }
+    override public int PickupType()
+    {
+        return 1;
     }
 }

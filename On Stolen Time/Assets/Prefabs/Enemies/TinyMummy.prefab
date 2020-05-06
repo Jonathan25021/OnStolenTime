@@ -138,7 +138,7 @@ MonoBehaviour:
   baseMoveSpeed: 2
   Damage: 10
   AttackSpeed: 0.75
-  AttackRadius: 0.3
+  AttackRadius: 0.1
   attackDamage: 15
 --- !u!95 &-9030268415529432886
 Animator:
