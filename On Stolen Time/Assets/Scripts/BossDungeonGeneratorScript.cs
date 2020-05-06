@@ -141,14 +141,12 @@ public class BossDungeonGeneratorScript : MonoBehaviour
                     }
                     if (Random.Range(0,20) == 0)
                     {
-                        Instantiate(Torch, new Vector3(i,j,0f), Quaternion.identity);
+                        Instantiate(Torch, new Vector3(i -50,j,0f), Quaternion.identity);
                     }
                 }
                     
             }
         }
-        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2((subDungeon.room.x + subDungeon.room.xMax)/2, (subDungeon.room.y + subDungeon.room.yMax) / 2);
-        GameObject.FindGameObjectWithTag("Enemy").transform.position = new Vector2(Random.Range(subDungeon.room.x, subDungeon.room.xMax), Random.Range(subDungeon.room.y, subDungeon.room.yMax));
         
         
     }
@@ -158,10 +156,16 @@ public class BossDungeonGeneratorScript : MonoBehaviour
     {
         if (boardPositionsFloor[i, j] == null)
         {
-            GameObject instance = Instantiate(tile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
+            GameObject instance = Instantiate(tile, new Vector3(i-50, j, 0f), Quaternion.identity) as GameObject;
             instance.transform.SetParent(transform);
             boardPositionsFloor[i, j] = instance;
         }
+    }
+
+    public void spawnPlayer()
+    {
+        GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2((rootSubDungeon.room.x + rootSubDungeon.room.xMax) / 2-50, (rootSubDungeon.room.y + rootSubDungeon.room.yMax) / 2);
+        GameObject.FindGameObjectWithTag("Boss").transform.position = new Vector2(Random.Range(rootSubDungeon.room.x, rootSubDungeon.room.xMax)-50, Random.Range(rootSubDungeon.room.y, rootSubDungeon.room.yMax));
     }
 
     // places a tile even if there is a tile already in that place
@@ -171,15 +175,16 @@ public class BossDungeonGeneratorScript : MonoBehaviour
         {
             Destroy(boardPositionsFloor[i, j]);
         }
-        GameObject instance = Instantiate(tile, new Vector3(i, j, 0f), Quaternion.identity) as GameObject;
+        GameObject instance = Instantiate(tile, new Vector3(i-50, j, 0f), Quaternion.identity) as GameObject;
         instance.transform.SetParent(transform);
         boardPositionsFloor[i, j] = instance;
     }
 
+    private SubDungeon rootSubDungeon;
     void Start()
     {
         playerSpawned = false;
-        SubDungeon rootSubDungeon = new SubDungeon(new Rect(0, 0, boardRows, boardColumns));
+        rootSubDungeon = new SubDungeon(new Rect(0, 0, boardRows, boardColumns));
         rootSubDungeon.CreateRoom();
 
         boardPositionsFloor = new GameObject[boardRows, boardColumns];

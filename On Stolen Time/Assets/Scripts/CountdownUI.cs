@@ -40,9 +40,9 @@ public class CountdownUI : MonoBehaviour
     {
         float portion = m_Player.currTimer / slice;
         int rounded = Mathf.RoundToInt(portion);
-        if (rounded < 0)
+        if (rounded < 1)
         {
-            rounded = 0;
+            rounded = 1;
         }
         m_Image.sprite = m_Sprites[rounded - 1];
         m_Text.text = (Mathf.Round(m_Player.currTimer * 100.0f) / 100.0f).ToString();

@@ -9,6 +9,7 @@ TagManager:
   - Chest
   - FloorTile
   - WallTile
+  - Boss
   layers:
   - Default
   - TransparentFX

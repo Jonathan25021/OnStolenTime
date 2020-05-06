@@ -11,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     public float maxHealth = 100;
     private float currHealth;
     public float currTimer;
+    public GameObject bossDungeon;
+    
     #endregion
 
     #region movemenentVars
@@ -42,8 +44,6 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region combatVars
-    public int attackStat;
-    public int defenseStat;
     public GameObject primaryWeapon;
     public GameObject secondaryWeapon;
     private int currWeapon;
@@ -92,6 +92,7 @@ public class PlayerScript : MonoBehaviour
     #region UnityFuncs
     void Start()
     {
+        endgame = false;
         PickupItems = new ArrayList();
         primaryWeapon = Instantiate(primaryWeapon) as GameObject;
         secondaryWeapon = Instantiate(secondaryWeapon) as GameObject;
@@ -174,13 +175,15 @@ public class PlayerScript : MonoBehaviour
     }
     #endregion
 
+    private bool endgame;
     #region timeFuncs
     private void countDown()
     {
-        if (currTimer < 0)
+        if (currTimer < 0 && !endgame)
         {
-            GM.LoadBossLevel(this.gameObject);
-
+            endgame = true;
+            bossDungeon.GetComponent<BossDungeonGeneratorScript>().spawnPlayer();
+            
         }
         currTimer -= rate * Time.deltaTime;
         lastUsed -= Time.deltaTime;
@@ -253,6 +256,7 @@ public class PlayerScript : MonoBehaviour
             primaryWeapon = rewindedFirstWeapon;
             secondaryWeapon = rewindedSecondWeapon;
             lastUsed = 2;
+            cost += cost;
         }
     }
     #endregion
@@ -606,8 +610,6 @@ public class PlayerScript : MonoBehaviour
     public void takeDamage(float damageVal)
     {
         StartCoroutine(DamageIndicator());
-        float adjustedDamage = damageVal * (defenseStat/100);
-        currHealth -= adjustedDamage;
         Debug.Log("hurt; current health = " + currHealth);
         if (state.Equals(State.Roll))
         {

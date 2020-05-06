@@ -328,6 +328,7 @@ public class DungeonGengeratorScript : MonoBehaviour
             if (!playerSpawned)
             {
                 GameObject.FindGameObjectWithTag("Player").transform.position = new Vector2((subDungeon.room.x + subDungeon.room.xMax)/2, (subDungeon.room.y + subDungeon.room.yMax) / 2);
+                GameObject.FindGameObjectWithTag("MainCamera").transform.position = new Vector2((subDungeon.room.x + subDungeon.room.xMax) / 2, (subDungeon.room.y + subDungeon.room.yMax) / 2);
             }
         }
         

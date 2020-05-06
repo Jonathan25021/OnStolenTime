@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3188436255452412268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3188436255452412259}
+  - component: {fileID: 3188436255452412258}
+  m_Layer: 0
+  m_Name: BossRoomGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3188436255452412259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188436255452412268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.95627093, y: -0.17055601, z: -2091.4395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3188436255452412258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3188436255452412268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6329417794480545acdc536a4fd3336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boardRows: 20
+  boardColumns: 20
+  minRoomSize: 15
+  maxRoomSize: 20
+  floorTiles:
+  - {fileID: 185571763658607565, guid: 7b92529f0cbd917408a22c265eff0039, type: 3}
+  - {fileID: 185571763658607565, guid: e2e5e48ff3f86f04d8f6e467ddd79470, type: 3}
+  - {fileID: 185571763658607565, guid: d79d2449fe923504aa5934fca53d462f, type: 3}
+  floorTile: {fileID: 185571763658607565, guid: d79d2449fe923504aa5934fca53d462f,
+    type: 3}
+  floorTileN: {fileID: 185571763658607565, guid: 6237adc089cc40c4ba6fbd12b6c0ec21,
+    type: 3}
+  floorTileNE: {fileID: 185571763658607565, guid: ae39e837509780e4aab6e571c2b94aef,
+    type: 3}
+  floorTileE: {fileID: 185571763658607565, guid: f3e4445f9b1a94945869381f7b450b2d,
+    type: 3}
+  floorTileSE: {fileID: 185571763658607565, guid: 1f56188cc3e1c8e469c47b9076efcc4b,
+    type: 3}
+  floorTileS: {fileID: 185571763658607565, guid: e36d66ba36cacec4aa995f91dd4c9df5,
+    type: 3}
+  floorTileSW: {fileID: 185571763658607565, guid: de22bf9adabc5d6479e850e2c97f1976,
+    type: 3}
+  floorTileW: {fileID: 185571763658607565, guid: 9559253e37c17c0499fba204dbf2778b,
+    type: 3}
+  floorTileNW: {fileID: 185571763658607565, guid: 93a55a1b47657c549b56b4b54f16486a,
+    type: 3}
+  corridorTile: {fileID: 185571763658607565, guid: 0723293d310a60a4280a379f535be6e5,
+    type: 3}
+  wallTile: {fileID: 185571763658607565, guid: 546fe4cab5787ce458dc1cb4d2ea7001, type: 3}
+  enemies: []
+  Torch: {fileID: 2447458300060905151, guid: 646e20557319da841ba8806600d311a0, type: 3}
